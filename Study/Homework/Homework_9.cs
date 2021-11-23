@@ -41,13 +41,17 @@ namespace lessons
 
         private int maxRentTime;
         /// <summary>
-        /// Maximum rental period in months
+        /// Maximum rental period in months. If Maximum <= Minimum, Maximim = Minimum + (Minimum - Maximum) + 1
         /// </summary>
         protected int MaxRentTime
         {
             set
             {
                 maxRentTime = CheckInputInt(value);
+                
+                if (maxRentTime <= MinRentTime)
+                    maxRentTime = MinRentTime + (MinRentTime - maxRentTime) + 1;
+                
             }
             get
             {
@@ -78,9 +82,10 @@ namespace lessons
 
         public void PrintCommon()
         {
-            DeeU.Print(Cost);
-            DeeU.Print(MinRentTime, MaxRentTime);
-            DeeU.Print(isPrepaidRequired);
+            DeeU.Print($"Is free: {isEmpty}");
+            DeeU.Print($"Cost: {Cost} per month");
+            DeeU.Print($"Rental time: from {MinRentTime} month(s) to {MaxRentTime}");
+            DeeU.Print($"Is prepaid required? {isPrepaidRequired}");
         }
 
         protected int CheckInputInt(int input)
@@ -159,59 +164,236 @@ namespace lessons
         public void Print()
         {
             PrintCommon();
-            DeeU.Print(RoomType);
-            DeeU.Print(NutritionType);
+            DeeU.Print($"Room number: {RoomNumber}");
+            DeeU.Print($"Room type: {RoomType}");
+            DeeU.Print($"Nutrition type: {NutritionType}");
+            
+            
 
         }
 
     }
+
+    public class Rental : Accommodation
+    {
+        public bool isPaidInternet;
+
+        public bool isPaidSecondKeys;
+
+        public bool isPaidCleaning;
+
+        public bool isFullHouse;
+        
+
+
+        public Rental
+            (int Cost, int MinRentTime, int MaxRentTime, 
+            bool isPrepaidRequired, bool IsPaidInternet, bool IsPaidSecondKeys,
+            bool IsPaidCleaning, bool IsFullHouse,  bool isEmpty = true)
+        {
+            isFullHouse = IsFullHouse;
+            isPaidCleaning = IsPaidCleaning;
+            isPaidInternet = IsPaidInternet;
+            isPaidSecondKeys = IsPaidSecondKeys;
+            
+            this.Cost = Cost;
+            this.MinRentTime = MinRentTime;
+            this.MaxRentTime = MaxRentTime;
+            this.isPrepaidRequired = isPrepaidRequired;
+            this.isEmpty = isEmpty;
+
+
+        }
+
+        public void Print()
+        {
+            PrintCommon();
+            DeeU.Print($"Is paid Internet? {isPaidInternet}");
+            DeeU.Print($"Is paid Second Keys? {isPaidSecondKeys}");
+            DeeU.Print($"Is paid Cleaning? {isPaidCleaning}");
+            DeeU.Print($"Is Full House? {isFullHouse}");
+        }
+
+    }
+
+
     public class Triangle
     {
-        private double side_A;
-        public double Side_A;
+        protected bool isExist;
+        protected double Side_A;
 
 
-        private double side_B;
-        public double Side_B;
+
+        protected double Side_B;
 
 
-        private double side_C;
-        public double Side_C;
+
+        protected double Side_C;
 
 
         /// <summary>
-        /// Angle between sides A and B
+        /// Angle ABC
         /// </summary>
-        public double Angle_AB;
+        public double Angle_Beta;
 
         /// <summary>
-        /// Angle between sides A and C
+        /// Angle CAB
         /// </summary>
-        public double Angle_AC;
+        public double Angle_Alpha;
 
         /// <summary>
-        /// Angle between sides B and C
+        /// Angle ACB
         /// </summary>
-        public double Angle_BC;
+        public double Angle_Gamma;
+
+        public Triangle() { }
 
         /// <summary>
         /// Create Triangle using 2 sides and angle between them
         /// </summary>
         /// <param name="angle">Angle between side_A and side_B</param>
-        /// 
-        public Triangle(double side_A, double side_B, double angle)
+        /// </summary>
+        public void Create(double side_A, double side_B, DeeU.Angle3 angle)
         {
             Side_A = side_A;
             Side_B = side_B;
-            Angle_AB = DeeU.Angle3.CheckAngle(angle);
+            Angle_Beta = angle.AngleValue;
+            Side_C = SideC_2SidesAngle(Side_A, Side_B, Angle_Beta);
 
-            Side_C = Math.Sqrt(Side_A * Side_A + Side_B * Side_B - 2 * Side_A * Side_B * Math.Cos(Angle_AB * Math.PI / 180));
-            DeeU.Print(Side_C);
+            CalcAngles();
+
+
+            
+
+            PrintTriangle();
+        }
+        public void Create(double side_A, double side_B, double side_C)
+        {
+            Side_A = side_A;
+            Side_B = side_B;
+            Side_C = side_C;
+
+            CalcAngles();
+
+
+        }
+        double GetAngle(double side_1, double side_2, double side_opposite)
+        {
+            double angle = Math.Acos((side_1*side_1 + side_2*side_2 - side_opposite*side_opposite) / (2 * side_1*side_2)) * (180 / Math.PI);
+
+            return angle;
+        }
+        
+        /// <summary>
+        /// Calc side C, using A and B. C = Sqrt(A^2 + B^2 - 2AB*Cos(angle between A and B))
+        /// </summary>
+        /// <param name="side_A"></param>
+        /// <param name="side_B"></param>
+        /// <param name="angle">Angle between side_A and side_B</param>
+        /// <returns></returns>
+        protected double SideC_2SidesAngle(double side_A, double side_B, double angle)
+        {
+            double side_C = Math.Sqrt(side_A * side_A + side_B * side_B - 2 * side_A * side_B * Math.Cos(angle * Math.PI / 180));
+            
+            return side_C;
+        }
+        public void CalcAngles()
+        {
+            Angle_Alpha = GetAngle(Side_A, Side_B, Side_C);
+            Angle_Beta = GetAngle(Side_B, Side_C, Side_A);
+            Angle_Gamma = GetAngle(Side_C, Side_A, Side_B);
+
+            if (!Double.IsNaN(Angle_Alpha))
+                isExist = true;
+            else
+            {Side_A = 0; Side_B = 0; Side_C = 0; Angle_Alpha = 0; Angle_Beta = 0; Angle_Gamma = 0; }
+
         }
 
+        public double GetPerimeter()
+        {
+            if(isExist)
+                return Side_A + Side_B + Side_C;
+            return 0;
+        }
 
+        public double GetSquare()
+        {
+            if (isExist)
+                return 0.5 * Side_A*Side_B*Math.Sin(Angle_Alpha*Math.PI / 180);
+            return 0;
+        }
+        public void PrintTriangle()
+        {
+            DeeU.Print("        A\n" +
+                       "        *\n" +
+                       "       *a*\n" +
+                       "SideA *   * SideB\n" +
+                       "     *     *\n" +
+                       "    * g   b *\n" +
+                       "   ***********\n" +
+                       " C    SideC    B\n");
+        }
+
+        public double A()
+        {
+            return Side_A;
+        }
+        public double B()
+        {
+            return Side_B;
+        }
+        public double C()
+        {
+            return Side_C;
+        }
+
+        public void Print()
+        {
+            if (isExist == false) { DeeU.Print("The triangle does not exist", "red"); return; }
+
+            DeeU.Print($"Alpha = {Angle_Alpha}°");
+            DeeU.Print($"Beta = {Angle_Beta}°");
+            DeeU.Print($"Gamma = {Angle_Gamma}°");
+            DeeU.Print($"Side A = {Side_A}");
+            DeeU.Print($"Side B = {Side_B}");
+            DeeU.Print($"Side C = {Side_C}");
+            DeeU.Print($"Permimeter = {GetPerimeter()}");
+            DeeU.Print($"Square = {GetSquare()}");
+            
+        }
     }
+    public class TriangleRight : Triangle
+    {
+        public void Create(double a, double b, double c)
+        {
+            DeeU.Print("eeeeeeee");
+        }
+        public TriangleRight(double Leg_A, double Leg_B)
+        {
+            Side_A = Leg_A;
+            Side_B = Leg_B;
+            Side_C = SideC_2SidesAngle(Side_A, Side_B, 90);
+            
+            DeeU.Print(Side_C);
+        }
+        public TriangleRight(double Leg_A, double Leg_B, double Hypothesis)
+        {
+            Side_A = Leg_A;
+            Side_B = Leg_B;
+            Side_C = Hypothesis;
 
+            CalcAngles();
+
+            if (Angle_Alpha != 90)
+                isExist = false;
+            Print();
+
+            
+
+            DeeU.Print(Side_C);
+        }
+    }
 
 
 

@@ -10,15 +10,26 @@ namespace lessons
 
 
 
-            var hotel = new Hotel("single", "full", 2, 23333, 1, 2, false);
-            hotel.Print();
+            //var hotel = new Hotel("sinsdgle", "full", 2, 23333, 1, 2, false);
+            //hotel.Populate();
+            //hotel.Print();
+
+            //var rental = new Rental(1500, 1, 12, true, false, false, true, false);
+            //rental.Print();
+
+            //var tri = new Triangle();
 
 
+            //tri.Create(3,4,5);
+            //tri.Print();
 
+            var rTri = new TriangleRight(3, 4, 5);
+            
+            //rTri.Print();
 
             //var PM = new PasswordManager();
             //PM.Start();
-            DeeU.Print("asыывs");
+
 
 
             //var game = new Chess();
