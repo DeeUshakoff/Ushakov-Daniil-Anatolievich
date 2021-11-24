@@ -23,8 +23,13 @@ namespace lessons
             //tri.Create(3,4,5);
             //tri.Print();
 
-            var rTri = new TriangleRight(3, 4, 5);
-            
+            //var rTri = new TriangleRight(3, 4, 5);
+
+
+            var IsoTri = new TriangleIsoscale();
+            IsoTri.Create(2,2);
+            DeeU.Print(IsoTri.GetSqaure());
+            IsoTri.PrintTriangle();
             //rTri.Print();
 
             //var PM = new PasswordManager();

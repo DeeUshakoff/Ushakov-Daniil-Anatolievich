@@ -262,9 +262,6 @@ namespace lessons
 
             CalcAngles();
 
-
-            
-
             PrintTriangle();
         }
         public void Create(double side_A, double side_B, double side_C)
@@ -303,7 +300,7 @@ namespace lessons
             Angle_Beta = GetAngle(Side_B, Side_C, Side_A);
             Angle_Gamma = GetAngle(Side_C, Side_A, Side_B);
 
-            if (!Double.IsNaN(Angle_Alpha))
+            if (!Double.IsNaN(Angle_Alpha) && !Double.IsNaN(Angle_Beta) && !Double.IsNaN(Angle_Gamma))
                 isExist = true;
             else
             {Side_A = 0; Side_B = 0; Side_C = 0; Angle_Alpha = 0; Angle_Beta = 0; Angle_Gamma = 0; }
@@ -367,8 +364,12 @@ namespace lessons
     {
         public void Create(double a, double b, double c)
         {
-            DeeU.Print("eeeeeeee");
-        }
+        
+        } // Method to hide the parrent method
+        public void Create(double side_A, double side_B, DeeU.Angle3 angle)
+        {
+
+        } // Method to hide the parrent method
         public TriangleRight(double Leg_A, double Leg_B)
         {
             Side_A = Leg_A;
@@ -395,6 +396,27 @@ namespace lessons
         }
     }
 
+    public class TriangleIsoscale : Triangle
+    {
+        double Height;
+        public void Create(double side, double side_base)
+        {
+            Side_A = side;
+            Side_B = side;
+            Side_C = side_base;
+            
+            CalcAngles();
+
+            Height = Math.Sqrt(4 * Side_A * Side_A - Side_C * Side_C) * 0.5;
+            Print();
+        }
+
+        public double GetSqaure()
+        {
+            return Math.Sqrt(4 * Side_A * Side_A - Side_C * Side_C) * 0.25 * Side_A;
+        }
+        
+    }
 
 
 }
