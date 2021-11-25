@@ -27,7 +27,7 @@ namespace lessons
 
 
             var IsoTri = new TriangleIsoscale();
-            IsoTri.Create(2,2);
+            IsoTri.Create(2,3);
             DeeU.Print(IsoTri.GetSqaure());
             IsoTri.PrintTriangle();
             //rTri.Print();

@@ -413,7 +413,7 @@ namespace lessons
 
         public double GetSqaure()
         {
-            return Math.Sqrt(4 * Side_A * Side_A - Side_C * Side_C) * 0.25 * Side_A;
+            return 0.5 * Side_C * Height;
         }
         
     }
