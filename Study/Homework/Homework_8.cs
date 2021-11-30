@@ -1,5 +1,5 @@
 ﻿
-namespace lessons
+namespace Study
 {
     /// <summary>
     /// Complex number is a number of the form a + bi, where a and b are real numbers. iPow = 1 by default

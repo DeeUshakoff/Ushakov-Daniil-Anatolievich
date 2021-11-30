@@ -5,7 +5,7 @@
 //using System.IO;
 //using System.Threading.Tasks;
 
-namespace lessons
+namespace Study
 {
     public class PasswordManager
     {

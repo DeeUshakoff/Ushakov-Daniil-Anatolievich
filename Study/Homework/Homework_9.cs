@@ -1,5 +1,5 @@
 ﻿
-namespace lessons
+namespace Study
 {
 
 
@@ -362,11 +362,11 @@ namespace lessons
     }
     public class TriangleRight : Triangle
     {
-        public void Create(double a, double b, double c)
+        public new void Create(double a, double b, double c)
         {
         
         } // Method to hide the parrent method
-        public void Create(double side_A, double side_B, DeeU.Angle3 angle)
+        public new void Create(double side_A, double side_B, DeeU.Angle3 angle)
         {
 
         } // Method to hide the parrent method

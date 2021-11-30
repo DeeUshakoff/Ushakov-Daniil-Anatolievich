@@ -1,5 +1,5 @@
 ﻿
-namespace lessons
+namespace Study
 {
     class Program
     {
@@ -10,43 +10,33 @@ namespace lessons
 
 
 
-            //var hotel = new Hotel("sinsdgle", "full", 2, 23333, 1, 2, false);
-            //hotel.Populate();
-            //hotel.Print();
+            var toy_1 = new Toy(10, false, 1, 1);
+            var toy_2 = new Toy(1, false, 1, 1);
+            var toy_3 = new Toy(2, false, 1, 1);
+            var toy_4 = new Toy(5, true, 1, 1);
 
-            //var rental = new Rental(1500, 1, 12, true, false, false, true, false);
-            //rental.Print();
+            var garland_1 = new Garland(3, false, 1, 1);
+            //var garland_2 = new Garland(3, false, 1, 1);
 
-            //var tri = new Triangle();
+            var tree_1 = new ChristmasTree(10, 2, 1);
+            var showcase_1 = new Showcase(20, 2);
+            
 
+            
+            var Manager = new ChristmasManager(tree_1, showcase_1);
 
-            //tri.Create(3,4,5);
-            //tri.Print();
-
-            //var rTri = new TriangleRight(3, 4, 5);
-
-
-            var IsoTri = new TriangleIsoscale();
-            IsoTri.Create(2,3);
-            DeeU.Print(IsoTri.GetSqaure());
-            IsoTri.PrintTriangle();
-            //rTri.Print();
-
-            //var PM = new PasswordManager();
-            //PM.Start();
+            
+            Manager.DecorateTree(toy_4);
+            Manager.DecorateTree(toy_4);
+            Manager.DecorateTree(garland_1);
 
 
 
-            //var game = new Chess();
-            //game.Play();
-
-
-
-
-
-
-
-
+            //Manager.ChristmasTree = tree;
+            //Manager.DecorateTree();
+            Manager.Print();
+            
+            
             DeeU.Wait();
 
 

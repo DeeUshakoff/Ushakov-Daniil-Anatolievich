@@ -1,6 +1,6 @@
 ﻿
 
-namespace lessons
+namespace Study
 {
     public class Chess
     {

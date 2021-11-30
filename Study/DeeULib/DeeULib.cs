@@ -1,5 +1,5 @@
 ﻿
-namespace lessons
+namespace Study
 {
     public static class DeeU
     {
@@ -258,7 +258,48 @@ namespace lessons
             return result;
         }
 
+        public static Toy[] Add(Toy[] source_array, params Toy[] add)
+        {
+            if (source_array == null || source_array.Length == 0)
+                return add;
+            Toy[] result = new Toy[source_array.Length + add.Length]; // Creating array with needing length
 
+            source_array.CopyTo(result, 0); // Copy source array to the new array
+            add.CopyTo(result, source_array.Length); // Copy add array or nums to the new array
+
+            return result;
+        }
+
+        public static Garland[] Add(Garland[] source_array, params Garland[] add)
+        {
+            if (source_array == null || source_array.Length == 0)
+                return add;
+            Garland[] result = new Garland[source_array.Length + add.Length]; // Creating array with needing length
+
+            source_array.CopyTo(result, 0); // Copy source array to the new array
+            add.CopyTo(result, source_array.Length); // Copy add array or nums to the new array
+
+            return result;
+        }
+
+        public static Toy[] Sort(Toy[] input)
+        {
+            Toy temp;
+            for (int i = 0; i < input.Length - 1; i++)
+            {
+                for (int j = i + 1; j < input.Length; j++)
+                {
+                    if (input[i].DecorationSquare > input[j].DecorationSquare)
+                    {
+                        temp = input[i];
+                        input[i] = input[j];
+                        input[j] = temp;
+                    }
+                }
+            }
+            
+            return input;
+        }
         public static int[] Slice(int[] source_array, int from, int to = -1, bool sorted = false) // Slice int[] array in range of index [from, to]
         {
             if (to == -1)
@@ -468,6 +509,20 @@ namespace lessons
             return input;
         }
 
+
+        public static double CheckLessZero(double input)
+        {
+            if (input < 0)
+                return 0;
+            return input;
+        }
+
+        public static int CheckLessZero(int input)
+        {
+            if (input < 0)
+                return 0;
+            return input;
+        }
         public class Angle3
         {
 
