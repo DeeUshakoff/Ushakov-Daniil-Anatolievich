@@ -232,7 +232,7 @@ namespace Study
                     
             }
 
-            
+            //ClearNulls();
         }
         public void DecorateTree(Garland input)
         {
@@ -267,7 +267,6 @@ namespace Study
                     {
                         if ((availableTreeSquare + temp_square - input.DecorationSquare >= 0) && (availableTreeSockets + temp_sockets - 1 >= 0))
                         {
-                            DeeU.Print("eeeee");
                             availableTreeSquare += (temp_square - input.DecorationSquare);
                             availableTreeSockets += (temp_sockets - 1);
                             foreach (var el in temp_toys)
@@ -286,12 +285,10 @@ namespace Study
                         temp_square += TreeToys[i].DecorationSquare;
                         temp_sockets++;
                         
-                        if (TreeToys[i] == null)
-                        {
-                            temp_toys[i] = new Toy(1,false,1,1);
-                            TreeToys[i] = new Toy(1,false,1,1);
-                            temp_toys[i].isExist = false;
-                        }
+                        
+                        temp_toys[i] = TreeToys[i];
+
+                        temp_toys[i].isExist = false;
                         
                         
                     }
@@ -301,6 +298,31 @@ namespace Study
 
 
             }
+            ClearNulls();
+
+            
+            availableTreeSockets = ChristmasTree.AvailableSockets_Count;
+            availableTreeSquare = ChristmasTree.DecorationsSquare;
+
+            foreach(var el in TreeGarlands)
+                if(el.isSocketRequired)
+                    availableTreeSockets--;
+            foreach (var el in TreeToys)
+                if (el.isSocketRequired)
+                    availableTreeSockets--;
+
+            foreach (var el in TreeGarlands)
+            {
+
+                availableTreeSquare -= el.DecorationSquare;
+
+            }
+                
+            foreach (var el in TreeToys)
+            {
+                availableTreeSquare -= el.DecorationSquare;
+            }
+                
 
         }
         public void DecorateShowcase(Toy input)
@@ -308,18 +330,121 @@ namespace Study
             if (availableShowcaseSquare - input.DecorationSquare >= 0)
             {
                 if (input.isSocketRequired && (availableShowcaseSockets - 1 >= 0))
-                    { availableShowcaseSquare -= input.DecorationSquare; availableShowcaseSockets--; }
-                else if (!input.isSocketRequired)
+                {
                     availableShowcaseSquare -= input.DecorationSquare;
-            }
-        }
+                    availableShowcaseSockets--;
+                    ShowcaseToys = DeeU.Add(ShowcaseToys, input);
+                    ShowcaseToys = DeeU.Sort(ShowcaseToys);
+                }
+                else if (!input.isSocketRequired)
+                {
+                    availableShowcaseSquare -= input.DecorationSquare;
+                    ShowcaseToys = DeeU.Add(ShowcaseToys, input);
+                    ShowcaseToys = DeeU.Sort(ShowcaseToys);
+                }
 
+            }
+            //ClearNulls();
+        }
+        public void DecorateShowcase(Garland input)
+        {
+            if (availableShowcaseSquare - input.DecorationSquare >= 0)
+            {
+                if (input.isSocketRequired && (availableShowcaseSockets - 1 >= 0)) //If enough space and socket need
+                {
+                    availableShowcaseSquare -= input.DecorationSquare;
+                    availableShowcaseSockets--;
+                    ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+                }
+                else if (!input.isSocketRequired) // If enough space and socket doesn't need
+                {
+                    availableShowcaseSquare -= input.DecorationSquare;
+                    ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+                }
+
+            }
+            else
+            {
+
+                double temp_square = 0; int temp_sockets = 0;
+                Toy[] temp_toys = new Toy[0];
+                if (Showcase != null)
+                {
+
+                    temp_toys = new Toy[ShowcaseToys.Length];
+
+
+
+                    for (int i = 0; i < ShowcaseToys.Length; i++)
+                    {
+                        if ((availableShowcaseSquare + temp_square - input.DecorationSquare >= 0) && (availableShowcaseSockets + temp_sockets - 1 >= 0))
+                        {
+                            availableShowcaseSquare += (temp_square - input.DecorationSquare);
+                            availableShowcaseSockets += (temp_sockets - 1);
+                            foreach (var el in temp_toys)
+                            {
+                                ShowcaseToys = new Toy[0];
+                                if (el != null)
+                                    if (el.isExist)
+                                        ShowcaseToys = DeeU.Add(temp_toys, el);
+                            }
+                            ShowcaseToys = temp_toys;
+                            ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+
+                            break;
+                        }
+
+                        temp_square += ShowcaseToys[i].DecorationSquare;
+                        temp_sockets++;
+
+
+                        temp_toys[i] = ShowcaseToys[i];
+
+                        temp_toys[i].isExist = false;
+
+
+                    }
+
+
+                }
+
+
+            }
+            ClearNulls();
+
+
+            availableShowcaseSockets = Showcase.AvailableSockets_Count;
+            availableShowcaseSquare = Showcase.DecorationsSquare;
+
+            foreach (var el in ShowcaseGarlands)
+                if (el.isSocketRequired)
+                    availableShowcaseSockets--;
+            foreach (var el in ShowcaseToys)
+                if (el.isSocketRequired)
+                    availableShowcaseSockets--;
+
+            foreach (var el in ShowcaseGarlands)
+            {
+
+                availableShowcaseSquare -= el.DecorationSquare;
+
+            }
+
+            foreach (var el in ShowcaseToys)
+            {
+                availableShowcaseSquare -= el.DecorationSquare;
+            }
+
+
+        }
         public void Print()
         {
             if (TreeGarlands != null)
             {
+
                 foreach (var el in TreeGarlands)
                 {
+                    
                     DeeU.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
                 }
             }
@@ -327,8 +452,8 @@ namespace Study
             {
                 foreach (var el in TreeToys)
                 {
-                    DeeU.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
-                    //DeeU.Print(el.DecorationSquare);
+                    
+                        DeeU.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
 
                 }
             }
@@ -342,6 +467,92 @@ namespace Study
                 DeeU.Print($"Available tree square: {availableTreeSquare}", "green");
             else
                 DeeU.Print("Available tree square: 0", "red");
+
+
+
+
+            if (ShowcaseGarlands != null)
+            {
+
+                foreach (var el in ShowcaseGarlands)
+                {
+
+                    DeeU.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
+                }
+            }
+            if (ShowcaseToys != null)
+            {
+                foreach (var el in ShowcaseToys)
+                {
+
+                    DeeU.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
+
+                }
+            }
+
+            if (availableShowcaseSockets > 0)
+                DeeU.Print($"Available Showcase sockets: {availableShowcaseSockets}", "green");
+            else
+                DeeU.Print("Available Showcase sockets: 0", "red");
+
+            if (availableShowcaseSquare > 0)
+                DeeU.Print($"Available Showcase square: {availableShowcaseSquare}", "green");
+            else
+                DeeU.Print("Available Showcase square: 0", "red");
+        }
+
+        void ClearNulls()
+        {
+            var temp_tree_toys = new Toy[0];
+            var temp_showcase_toys = new Toy[0];
+
+            var temp_tree_garlands = new Garland[0] ;
+            var temp_showcase_garlands = new Garland[0] ;
+
+            //if (TreeToys != null && ShowcaseToys != null && TreeGarlands != null && ShowcaseGarlands != null)
+            if(TreeToys != null)
+            {
+                foreach (var el in TreeToys)
+                {
+                    if (el != null)
+                        temp_tree_toys = DeeU.Add(temp_tree_toys, el);
+                }
+            }
+            
+            if ( ShowcaseToys != null)
+            {
+                foreach (var el in ShowcaseToys)
+                {
+                    if (el != null)
+                        temp_showcase_toys = DeeU.Add(temp_showcase_toys, el);
+                }
+            }
+            if(TreeGarlands != null)
+            {
+                foreach (var el in TreeGarlands)
+                {
+                    
+                    if (el != null)
+                        temp_tree_garlands = DeeU.Add(temp_tree_garlands, el);
+
+                }
+            }
+            
+            if(ShowcaseGarlands != null)
+            {
+                foreach (var el in ShowcaseGarlands)
+                {
+                    if (el != null)
+                        temp_showcase_garlands = DeeU.Add(temp_showcase_garlands, el);
+                }
+            }
+            
+            TreeToys = temp_tree_toys;
+            TreeGarlands = temp_tree_garlands;
+
+            ShowcaseToys = temp_showcase_toys;
+            ShowcaseGarlands = temp_showcase_garlands;
+
         }
     }
 }

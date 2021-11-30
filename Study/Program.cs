@@ -25,9 +25,11 @@ namespace Study
             
             var Manager = new ChristmasManager(tree_1, showcase_1);
 
+            Manager.DecorateTree(toy_3);
+            Manager.DecorateTree(toy_4);
+            Manager.DecorateTree(toy_4);
             
-            Manager.DecorateTree(toy_4);
-            Manager.DecorateTree(toy_4);
+            
             Manager.DecorateTree(garland_1);
 
 
