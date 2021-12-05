@@ -557,6 +557,10 @@ namespace Study
 
 
         }
+        public static void Print(this string source)
+        {
+            Console.WriteLine(source);
+        }
         public static void Wait()
         {
             Console.ReadLine();

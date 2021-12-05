@@ -3,36 +3,36 @@ namespace Study
 {
     public class Student
     {
-#pragma warning disable CS8618 // поле "name", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+
         private string name;
-#pragma warning restore CS8618 // поле "name", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+
         public string Name
         {
             get {  return name; }
             set { name = WithoutDigits(value); }
         }
 
-#pragma warning disable CS8618 // поле "surname", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+ 
         private string surname;
-#pragma warning restore CS8618 // поле "surname", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+ 
         public string Surname
         {
             get { return surname; }
             set { surname = WithoutDigits(value); }
         }
 
-#pragma warning disable CS8618 // поле "patronymic", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+ 
         private string patronymic;
-#pragma warning restore CS8618 // поле "patronymic", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающий значения NULL.
+ 
         public string Patronymic
         {
             get { return patronymic; }
             set { patronymic = WithoutDigits(value); }
         }
 
-#pragma warning disable CS8618 // свойство "Group", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить свойство как допускающий значения NULL.
+ 
         public string Group {  get; set; }
-#pragma warning restore CS8618 // свойство "Group", не допускающий значения NULL, должен содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить свойство как допускающий значения NULL.
+ 
 
         public double Progress { get; set; }
 

@@ -4,7 +4,7 @@ namespace Study
     /// <summary>
     /// Complex number is a number of the form a + bi, where a and b are real numbers. iPow = 1 by default
     /// </summary>
-    public class CNum
+    public class CNum : ICloneable
     {
         /// <summary>
         /// x - Real part
@@ -186,6 +186,10 @@ namespace Study
                 return true;
             return false;
         }
+        public object Clone()
+        {
+            return new CNum(x = this.x, b = this.b, iPow = this.iPow);
+        }
         public void Print()
         {
             DeeU.Print(toString());
@@ -195,9 +199,10 @@ namespace Study
 
     }
 
-    public class RationalFraction
+    public class RationalFraction : IComparable
     {
         public int Numerator, Denumenator;
+        public double value;
 
         public RationalFraction(int numerator, int denumenator = 1)
         {
@@ -212,6 +217,7 @@ namespace Study
                 denumenator = 1;
             }
             Reduce();
+            value = Value();
         }
 
         public void Reduce()
@@ -353,6 +359,23 @@ namespace Study
             return Denumenator / Numerator;
         }
 
+        // Comparing from small to big
+        public int CompareTo(object o)
+        {
+
+            RationalFraction toCompare = (RationalFraction)o;
+            if (o != null && this != null)
+            {
+                if (this.value > toCompare.value)
+                    return -1;
+                else if (this.value < toCompare.value)
+                    return 1;
+                else
+                    return 0;
+            }
+            else
+                throw new Exception("Unnable to compare objects");
+        }
         public static bool IsEqual(RationalFraction input, RationalFraction input_2)
         {
             if (input.Numerator == input_2.Numerator && input.Denumenator == input_2.Denumenator)
