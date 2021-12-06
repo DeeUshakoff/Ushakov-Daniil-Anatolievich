@@ -158,8 +158,8 @@ namespace Study
             input_2 = Math.Abs(input_2);
 
 
-            int[] a = DeeU.ToArray(IntNum);
-            int[] b = DeeU.ToArray(input_2);
+            int[] a = DeeUseless.ToArray(IntNum);
+            int[] b = DeeUseless.ToArray(input_2);
 
 
             int[] summa;
@@ -187,7 +187,7 @@ namespace Study
             int[] summa = new int[a.Length];
 
             if (a.Length > b.Length)
-                b = DeeU.Add(new int[a.Length - b.Length], b);
+                b = DeeUseless.Add(new int[a.Length - b.Length], b);
 
             int in_brain = 0;
 
@@ -211,7 +211,7 @@ namespace Study
             if (in_brain == 1)
             {
                 int[] new_summa = { 1 };
-                new_summa = DeeU.Add(new_summa, summa);
+                new_summa = DeeUseless.Add(new_summa, summa);
                 return new_summa;
             }
 
@@ -241,8 +241,8 @@ namespace Study
 
             input = Math.Abs(input);
 
-            int[] a = DeeU.ToArray(IntNum);
-            int[] b = DeeU.ToArray(input);
+            int[] a = DeeUseless.ToArray(IntNum);
+            int[] b = DeeUseless.ToArray(input);
 
             
             if (a.Length >= b.Length)
@@ -286,8 +286,8 @@ namespace Study
         private int[] Diff_core(int[] a, int[] b)
         {
             if (a.Length > b.Length)
-                b = DeeU.Add(new int[a.Length - b.Length], b);
-            //DeeU.Print(b.Length);
+                b = DeeUseless.Add(new int[a.Length - b.Length], b);
+            //DeeUseless.Print(b.Length);
             int[] res = new int[a.Length];
 
             int in_brain = 0;
@@ -321,7 +321,7 @@ namespace Study
                     break;
             }
 
-            return DeeU.Slice(res, zero_counter);
+            return DeeUseless.Slice(res, zero_counter);
         }
 
 
@@ -330,8 +330,8 @@ namespace Study
             if ((IntNum > 0 && input_2 < 0) || (IntNum < 0 && input_2 > 0))
                 IsPositive = false;
 
-            int[] a = DeeU.ToArray(Math.Abs(IntNum));
-            int[] b = DeeU.ToArray(Math.Abs(input_2));
+            int[] a = DeeUseless.ToArray(Math.Abs(IntNum));
+            int[] b = DeeUseless.ToArray(Math.Abs(input_2));
 
 
             if (IntNum == 0 || input_2 == 0)
@@ -363,14 +363,14 @@ namespace Study
                 else
                 {
                     int tmp = (a[i] + in_brain) * b;
-                    DeeU.Print(tmp);
+                    DeeUseless.Print(tmp);
                     res[i] = ((a[i] + in_brain) * b) % 10;
-                    if (DeeU.Length(tmp) == 1)
+                    if (DeeUseless.Length(tmp) == 1)
                         in_brain = tmp;
-                    else if (DeeU.Length(tmp) == 2)
-                        in_brain = DeeU.ToArray(tmp)[0];
-                    else if (DeeU.Length(tmp) > 2)
-                        in_brain = DeeU.ToInt(DeeU.Slice(tmp.ToString(), 0, tmp.ToString().Length - 2));
+                    else if (DeeUseless.Length(tmp) == 2)
+                        in_brain = DeeUseless.ToArray(tmp)[0];
+                    else if (DeeUseless.Length(tmp) > 2)
+                        in_brain = DeeUseless.ToInt(DeeUseless.Slice(tmp.ToString(), 0, tmp.ToString().Length - 2));
                 }
             }
             Num = res;
@@ -381,13 +381,13 @@ namespace Study
         public void PrintNum(bool is_line = false)
         {
             if (IsPositive == false)
-                DeeU.Print("Number is negative", "red");
+                DeeUseless.Print("Number is negative", "red");
             if (is_line)
-                DeeU.PrintL(Num);
+                DeeUseless.PrintL(Num);
             else
             {
                 
-                DeeU.PrintL(Num);
+                DeeUseless.PrintL(Num);
                 Console.WriteLine();
             }
 

@@ -112,9 +112,9 @@ namespace Study
 
         private string iCalc(int pow)
         {
-            int n = DeeU.DivRem(pow, 4);
+            int n = DeeUseless.DivRem(pow, 4);
 
-            if (DeeU.ToDouble(pow) / 4 == 0)
+            if (DeeUseless.ToDouble(pow) / 4 == 0)
                 return "1";
             else if (pow == n + 1)
                 return "i";
@@ -192,7 +192,7 @@ namespace Study
         }
         public void Print()
         {
-            DeeU.Print(toString());
+            DeeUseless.Print(toString());
         }
 
         private class Different_iPowException : ApplicationException { }
@@ -211,7 +211,7 @@ namespace Study
 
             if (denumenator == 0)
                 throw new DivideByZeroException();
-            if (DeeU.ToDouble(numerator) / denumenator == 0)
+            if (DeeUseless.ToDouble(numerator) / denumenator == 0)
             {
                 numerator /= denumenator;
                 denumenator = 1;
@@ -675,7 +675,7 @@ namespace Study
             {
 
                 var ret = CNum.Sum(CNum.Multiply(c_X, c_X), CNum.Multiply(c_Y, c_Y));
-                DeeU.Print($"Sqaure root from {ret.toString()}");
+                DeeUseless.Print($"Sqaure root from {ret.toString()}");
                 return 0;
             }
             else if (vectorType == 2)

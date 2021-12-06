@@ -62,7 +62,7 @@ namespace Study
         /// </summary>
         void Select()
         {
-            DeeU.Print("Chose what to do: \n Create - Create/Change file \n Open - display Password data \n Create Lib - create local Password lib in RAM");
+            DeeUseless.Print("Chose what to do: \n Create - Create/Change file \n Open - display Password data \n Create Lib - create local Password lib in RAM");
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             string input = Console.ReadLine();
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
@@ -76,7 +76,7 @@ namespace Study
                 else
                 {
                     Console.Clear();
-                    DeeU.Print("Chose what to do: \n Create - Create/Change file \n Open - display Password data \n Create Lib - create local Password lib in RAM");
+                    DeeUseless.Print("Chose what to do: \n Create - Create/Change file \n Open - display Password data \n Create Lib - create local Password lib in RAM");
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                     input = Console.ReadLine();
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
@@ -102,11 +102,11 @@ namespace Study
             {
                 Console.Clear();
 
-                DeeU.Print(">Password lib creation\n", "green");
+                DeeUseless.Print(">Password lib creation\n", "green");
 
 
                 Console.Write("Enter Passwords count: ");
-                int count = DeeU.ReadInt();
+                int count = DeeUseless.ReadInt();
                 PasswordData[] PassLib = new PasswordData[count];
                 for (int i = 0; i < count; i++)
                 {
@@ -152,7 +152,7 @@ namespace Study
                     break;
 
                 Console.Clear();
-                DeeU.Print("Path not found", "red");
+                DeeUseless.Print("Path not found", "red");
                 Console.Write("Enter the name of the file: ");
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
                 directory_path = Console.ReadLine();
@@ -161,7 +161,7 @@ namespace Study
 
 
             Console.Clear();
-            DeeU.Print($"> {directory_path}", "green");
+            DeeUseless.Print($"> {directory_path}", "green");
 
             Console.Write("Enter the File name: ");
 
@@ -180,7 +180,7 @@ namespace Study
                         break;
 
                     Console.Clear();
-                    DeeU.Print("File not found", "red");
+                    DeeUseless.Print("File not found", "red");
                     Console.Write("Enter the File name: ");
 
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
@@ -252,7 +252,7 @@ namespace Study
         {
             if (!File.Exists(path))
             {
-                DeeU.Print("File not found");
+                DeeUseless.Print("File not found");
                 return;
             }
             else
@@ -262,7 +262,7 @@ namespace Study
 
 
                     string[] FileText = File.ReadAllLines(path);
-                    if (FileText[0] != "PassMnger") { DeeU.Print("Wrong data type"); return; }
+                    if (FileText[0] != "PassMnger") { DeeUseless.Print("Wrong data type"); return; }
 
                     else
                     {
@@ -290,7 +290,7 @@ namespace Study
                 
             }
             
-            DeeU.Print($"Succesfully created new Password data in\n{filePath}", "green");
+            DeeUseless.Print($"Succesfully created new Password data in\n{filePath}", "green");
         }
         /// <summary>
         /// Not ready :)
@@ -319,8 +319,8 @@ namespace Study
         /// </summary>
         public void PrintData()
         {
-            DeeU.Print($"> {filePath}", "green");
-            DeeU.Print($"From {ServiceName}\nPassword: {Password} \nUsername: {Username}");
+            DeeUseless.Print($"> {filePath}", "green");
+            DeeUseless.Print($"From {ServiceName}\nPassword: {Password} \nUsername: {Username}");
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Study
             
             Console.Clear();
 
-            DeeU.Print("Press Enter to start game", "green");
+            DeeUseless.Print("Press Enter to start game", "green");
             bool is_started = false;
             while (!is_started)
             {
@@ -49,7 +49,7 @@ namespace Study
                 else
                 {
                     Console.Clear();
-                    DeeU.Print("Press Enter to start game", "green");
+                    DeeUseless.Print("Press Enter to start game", "green");
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Study
         }
         void PrintDesk()
         {
-            DeeU.Print(DisplayDesk[5,5]);
+            DeeUseless.Print(DisplayDesk[5,5]);
 
             FillDisplayDesk();
             for (int i = 0; i <= 17; i++)

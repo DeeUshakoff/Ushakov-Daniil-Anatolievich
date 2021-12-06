@@ -82,10 +82,10 @@ namespace Study
 
         public void PrintCommon()
         {
-            DeeU.Print($"Is free: {isEmpty}");
-            DeeU.Print($"Cost: {Cost} per month");
-            DeeU.Print($"Rental time: from {MinRentTime} month(s) to {MaxRentTime}");
-            DeeU.Print($"Is prepaid required? {isPrepaidRequired}");
+            DeeUseless.Print($"Is free: {isEmpty}");
+            DeeUseless.Print($"Cost: {Cost} per month");
+            DeeUseless.Print($"Rental time: from {MinRentTime} month(s) to {MaxRentTime}");
+            DeeUseless.Print($"Is prepaid required? {isPrepaidRequired}");
         }
 
         protected int CheckInputInt(int input)
@@ -164,9 +164,9 @@ namespace Study
         public void Print()
         {
             PrintCommon();
-            DeeU.Print($"Room number: {RoomNumber}");
-            DeeU.Print($"Room type: {RoomType}");
-            DeeU.Print($"Nutrition type: {NutritionType}");
+            DeeUseless.Print($"Room number: {RoomNumber}");
+            DeeUseless.Print($"Room type: {RoomType}");
+            DeeUseless.Print($"Nutrition type: {NutritionType}");
             
             
 
@@ -208,10 +208,10 @@ namespace Study
         public void Print()
         {
             PrintCommon();
-            DeeU.Print($"Is paid Internet? {isPaidInternet}");
-            DeeU.Print($"Is paid Second Keys? {isPaidSecondKeys}");
-            DeeU.Print($"Is paid Cleaning? {isPaidCleaning}");
-            DeeU.Print($"Is Full House? {isFullHouse}");
+            DeeUseless.Print($"Is paid Internet? {isPaidInternet}");
+            DeeUseless.Print($"Is paid Second Keys? {isPaidSecondKeys}");
+            DeeUseless.Print($"Is paid Cleaning? {isPaidCleaning}");
+            DeeUseless.Print($"Is Full House? {isFullHouse}");
         }
 
     }
@@ -253,7 +253,7 @@ namespace Study
         /// </summary>
         /// <param name="angle">Angle between side_A and side_B</param>
         /// </summary>
-        public void Create(double side_A, double side_B, DeeU.Angle3 angle)
+        public void Create(double side_A, double side_B, DeeUseless.Angle3 angle)
         {
             Side_A = side_A;
             Side_B = side_B;
@@ -322,7 +322,7 @@ namespace Study
         }
         public void PrintTriangle()
         {
-            DeeU.Print("        A\n" +
+            DeeUseless.Print("        A\n" +
                        "        *\n" +
                        "       *a*\n" +
                        "SideA *   * SideB\n" +
@@ -347,16 +347,16 @@ namespace Study
 
         public void Print()
         {
-            if (isExist == false) { DeeU.Print("The triangle does not exist", "red"); return; }
+            if (isExist == false) { DeeUseless.Print("The triangle does not exist", "red"); return; }
 
-            DeeU.Print($"Alpha = {Angle_Alpha}°");
-            DeeU.Print($"Beta = {Angle_Beta}°");
-            DeeU.Print($"Gamma = {Angle_Gamma}°");
-            DeeU.Print($"Side A = {Side_A}");
-            DeeU.Print($"Side B = {Side_B}");
-            DeeU.Print($"Side C = {Side_C}");
-            DeeU.Print($"Permimeter = {GetPerimeter()}");
-            DeeU.Print($"Square = {GetSquare()}");
+            DeeUseless.Print($"Alpha = {Angle_Alpha}°");
+            DeeUseless.Print($"Beta = {Angle_Beta}°");
+            DeeUseless.Print($"Gamma = {Angle_Gamma}°");
+            DeeUseless.Print($"Side A = {Side_A}");
+            DeeUseless.Print($"Side B = {Side_B}");
+            DeeUseless.Print($"Side C = {Side_C}");
+            DeeUseless.Print($"Permimeter = {GetPerimeter()}");
+            DeeUseless.Print($"Square = {GetSquare()}");
             
         }
     }
@@ -366,7 +366,7 @@ namespace Study
         {
         
         } // Method to hide the parrent method
-        public new void Create(double side_A, double side_B, DeeU.Angle3 angle)
+        public new void Create(double side_A, double side_B, DeeUseless.Angle3 angle)
         {
 
         } // Method to hide the parrent method
@@ -376,7 +376,7 @@ namespace Study
             Side_B = Leg_B;
             Side_C = SideC_2SidesAngle(Side_A, Side_B, 90);
             
-            DeeU.Print(Side_C);
+            DeeUseless.Print(Side_C);
         }
         public TriangleRight(double Leg_A, double Leg_B, double Hypothesis)
         {
@@ -392,7 +392,7 @@ namespace Study
 
             
 
-            DeeU.Print(Side_C);
+            DeeUseless.Print(Side_C);
         }
     }
 

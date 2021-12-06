@@ -17,7 +17,7 @@ namespace Study
             }
             set
             {
-                decorationsSquare = DeeU.CheckLessZero(value);
+                decorationsSquare = DeeUseless.CheckLessZero(value);
             }
         }
         private int availableSockets_Count;
@@ -29,7 +29,7 @@ namespace Study
             }
             set
             {
-                availableSockets_Count = DeeU.CheckLessZero(value);
+                availableSockets_Count = DeeUseless.CheckLessZero(value);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Study
             }
             set
             {
-                height = DeeU.CheckLessZero(value);
+                height = DeeUseless.CheckLessZero(value);
             }
         }
         public ChristmasTree(double decorationSquare, int availableSockets_Count, int height) : base(decorationSquare, availableSockets_Count)
@@ -86,7 +86,7 @@ namespace Study
             }
             set
             {
-                decorationSquare = DeeU.CheckLessZero(value);
+                decorationSquare = DeeUseless.CheckLessZero(value);
             }
         }
         public bool isSocketRequired;
@@ -109,7 +109,7 @@ namespace Study
             }
             set
             {
-                modesCount = DeeU.CheckLessZero(value);
+                modesCount = DeeUseless.CheckLessZero(value);
                 if (modesCount == 0)
                     modesCount = 1;
             }
@@ -122,7 +122,7 @@ namespace Study
             }
             set
             {
-                colorsCount = DeeU.CheckLessZero(value);
+                colorsCount = DeeUseless.CheckLessZero(value);
                 if (colorsCount == 0)
                     colorsCount = 1;
             }
@@ -150,7 +150,7 @@ namespace Study
             }
             set
             {
-                weight = DeeU.CheckLessZero(value);
+                weight = DeeUseless.CheckLessZero(value);
             }
         }
         private int fragility;
@@ -220,14 +220,14 @@ namespace Study
                 { 
                     availableTreeSquare -= input.DecorationSquare;
                     availableTreeSockets--;
-                    TreeToys = DeeU.Add(TreeToys, input);
-                    TreeToys = DeeU.Sort(TreeToys);
+                    TreeToys = DeeUseless.Add(TreeToys, input);
+                    TreeToys = DeeUseless.Sort(TreeToys);
                 }
                 else if (!input.isSocketRequired)
                 {
                     availableTreeSquare -= input.DecorationSquare;
-                    TreeToys = DeeU.Add(TreeToys, input);
-                    TreeToys = DeeU.Sort(TreeToys);
+                    TreeToys = DeeUseless.Add(TreeToys, input);
+                    TreeToys = DeeUseless.Sort(TreeToys);
                 }
                     
             }
@@ -242,12 +242,12 @@ namespace Study
                 {
                     availableTreeSquare -= input.DecorationSquare;
                     availableTreeSockets--;
-                    TreeGarlands = DeeU.Add(TreeGarlands, input);
+                    TreeGarlands = DeeUseless.Add(TreeGarlands, input);
                 }
                 else if (!input.isSocketRequired) // If enough space and socket doesn't need
                 {
                     availableTreeSquare -= input.DecorationSquare;
-                    TreeGarlands = DeeU.Add(TreeGarlands, input);
+                    TreeGarlands = DeeUseless.Add(TreeGarlands, input);
                 }
 
             }
@@ -274,10 +274,10 @@ namespace Study
                                 TreeToys = new Toy[0];
                                 if (el != null)
                                     if (el.isExist)
-                                        TreeToys = DeeU.Add(temp_toys, el);
+                                        TreeToys = DeeUseless.Add(temp_toys, el);
                             }
                             TreeToys = temp_toys;
-                            TreeGarlands = DeeU.Add(TreeGarlands, input);
+                            TreeGarlands = DeeUseless.Add(TreeGarlands, input);
                             
                             break;
                         }
@@ -333,14 +333,14 @@ namespace Study
                 {
                     availableShowcaseSquare -= input.DecorationSquare;
                     availableShowcaseSockets--;
-                    ShowcaseToys = DeeU.Add(ShowcaseToys, input);
-                    ShowcaseToys = DeeU.Sort(ShowcaseToys);
+                    ShowcaseToys = DeeUseless.Add(ShowcaseToys, input);
+                    ShowcaseToys = DeeUseless.Sort(ShowcaseToys);
                 }
                 else if (!input.isSocketRequired)
                 {
                     availableShowcaseSquare -= input.DecorationSquare;
-                    ShowcaseToys = DeeU.Add(ShowcaseToys, input);
-                    ShowcaseToys = DeeU.Sort(ShowcaseToys);
+                    ShowcaseToys = DeeUseless.Add(ShowcaseToys, input);
+                    ShowcaseToys = DeeUseless.Sort(ShowcaseToys);
                 }
 
             }
@@ -354,12 +354,12 @@ namespace Study
                 {
                     availableShowcaseSquare -= input.DecorationSquare;
                     availableShowcaseSockets--;
-                    ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+                    ShowcaseGarlands = DeeUseless.Add(ShowcaseGarlands, input);
                 }
                 else if (!input.isSocketRequired) // If enough space and socket doesn't need
                 {
                     availableShowcaseSquare -= input.DecorationSquare;
-                    ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+                    ShowcaseGarlands = DeeUseless.Add(ShowcaseGarlands, input);
                 }
 
             }
@@ -386,10 +386,10 @@ namespace Study
                                 ShowcaseToys = new Toy[0];
                                 if (el != null)
                                     if (el.isExist)
-                                        ShowcaseToys = DeeU.Add(temp_toys, el);
+                                        ShowcaseToys = DeeUseless.Add(temp_toys, el);
                             }
                             ShowcaseToys = temp_toys;
-                            ShowcaseGarlands = DeeU.Add(ShowcaseGarlands, input);
+                            ShowcaseGarlands = DeeUseless.Add(ShowcaseGarlands, input);
 
                             break;
                         }
@@ -445,7 +445,7 @@ namespace Study
                 foreach (var el in TreeGarlands)
                 {
                     
-                    DeeU.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
+                    DeeUseless.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
                 }
             }
             if (TreeToys != null)
@@ -453,20 +453,20 @@ namespace Study
                 foreach (var el in TreeToys)
                 {
                     
-                        DeeU.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
+                        DeeUseless.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
 
                 }
             }
 
             if(availableTreeSockets > 0)
-                DeeU.Print($"Available tree sockets: {availableTreeSockets}", "green");
+                DeeUseless.Print($"Available tree sockets: {availableTreeSockets}", "green");
             else
-                DeeU.Print("Available tree sockets: 0", "red");
+                DeeUseless.Print("Available tree sockets: 0", "red");
 
             if (availableTreeSquare > 0)
-                DeeU.Print($"Available tree square: {availableTreeSquare}", "green");
+                DeeUseless.Print($"Available tree square: {availableTreeSquare}", "green");
             else
-                DeeU.Print("Available tree square: 0", "red");
+                DeeUseless.Print("Available tree square: 0", "red");
 
 
 
@@ -477,7 +477,7 @@ namespace Study
                 foreach (var el in ShowcaseGarlands)
                 {
 
-                    DeeU.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
+                    DeeUseless.Print($"Garland, square {el.DecorationSquare}, need socket? {el.isSocketRequired}, mode's count {el.ModesCount}, color's count {el.ColorsCount}");
                 }
             }
             if (ShowcaseToys != null)
@@ -485,20 +485,20 @@ namespace Study
                 foreach (var el in ShowcaseToys)
                 {
 
-                    DeeU.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
+                    DeeUseless.Print($"Toy, square {el.DecorationSquare}, need socket? {el.isSocketRequired}");
 
                 }
             }
 
             if (availableShowcaseSockets > 0)
-                DeeU.Print($"Available Showcase sockets: {availableShowcaseSockets}", "green");
+                DeeUseless.Print($"Available Showcase sockets: {availableShowcaseSockets}", "green");
             else
-                DeeU.Print("Available Showcase sockets: 0", "red");
+                DeeUseless.Print("Available Showcase sockets: 0", "red");
 
             if (availableShowcaseSquare > 0)
-                DeeU.Print($"Available Showcase square: {availableShowcaseSquare}", "green");
+                DeeUseless.Print($"Available Showcase square: {availableShowcaseSquare}", "green");
             else
-                DeeU.Print("Available Showcase square: 0", "red");
+                DeeUseless.Print("Available Showcase square: 0", "red");
         }
 
         void ClearNulls()
@@ -515,7 +515,7 @@ namespace Study
                 foreach (var el in TreeToys)
                 {
                     if (el != null)
-                        temp_tree_toys = DeeU.Add(temp_tree_toys, el);
+                        temp_tree_toys = DeeUseless.Add(temp_tree_toys, el);
                 }
             }
             
@@ -524,7 +524,7 @@ namespace Study
                 foreach (var el in ShowcaseToys)
                 {
                     if (el != null)
-                        temp_showcase_toys = DeeU.Add(temp_showcase_toys, el);
+                        temp_showcase_toys = DeeUseless.Add(temp_showcase_toys, el);
                 }
             }
             if(TreeGarlands != null)
@@ -533,7 +533,7 @@ namespace Study
                 {
                     
                     if (el != null)
-                        temp_tree_garlands = DeeU.Add(temp_tree_garlands, el);
+                        temp_tree_garlands = DeeUseless.Add(temp_tree_garlands, el);
 
                 }
             }
@@ -543,7 +543,7 @@ namespace Study
                 foreach (var el in ShowcaseGarlands)
                 {
                     if (el != null)
-                        temp_showcase_garlands = DeeU.Add(temp_showcase_garlands, el);
+                        temp_showcase_garlands = DeeUseless.Add(temp_showcase_garlands, el);
                 }
             }
             

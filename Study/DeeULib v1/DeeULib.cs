@@ -1,11 +1,12 @@
 ﻿
 namespace Study
 {
-    public static class DeeU
+    public static class DeeUseless
     {
-
+        
         public static void Print(string input, string color = "")
         {
+
             color = color.ToLower();
 
             if (color == "red")
@@ -117,9 +118,8 @@ namespace Study
             {
                 try
                 {
-#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL, для параметра "s" в "int int.Parse(string s)".
+
                     output = Int32.Parse(Console.ReadLine());
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL, для параметра "s" в "int int.Parse(string s)".
                     return output;
                 }
                 catch (Exception )
@@ -453,7 +453,7 @@ namespace Study
 
         public static bool IsInt(double input)
         {
-            int integer = DeeU.ToInt(input);
+            int integer = DeeUseless.ToInt(input);
 
             if (input - integer > 0)
             {
@@ -479,13 +479,13 @@ namespace Study
 
         public static int[] ToArray(int input)
         {
-            int length = DeeU.Length(input);
+            int length = DeeUseless.Length(input);
             int[] output = new int[length];
 
             for (int i = length - 1; i >= 0; i--)
             {
                 output[i] = input % 10;
-                input = DeeU.DeleteLastSymbol(input);
+                input = DeeUseless.DeleteLastSymbol(input);
             }
 
             return output;
@@ -505,7 +505,6 @@ namespace Study
         }
         public static string Replace(string input, string replaceable, string replacement) // Not ready
         {
-
             return input;
         }
 
@@ -546,7 +545,7 @@ namespace Study
                     return input_Angle;
                 else
                 {
-                    DeeU.Print("Wrong Angle value, must be <180");
+                    DeeUseless.Print("Wrong Angle value, must be <180");
                     return 0;
                 }
             }
@@ -557,10 +556,7 @@ namespace Study
 
 
         }
-        public static void Print(this string source)
-        {
-            Console.WriteLine(source);
-        }
+       
         public static void Wait()
         {
             Console.ReadLine();
@@ -571,5 +567,5 @@ namespace Study
         }
 
     }
-
+    
 }
