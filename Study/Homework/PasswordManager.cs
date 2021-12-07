@@ -9,7 +9,7 @@ namespace Study
 {
     public class PasswordManager
     {
-        //
+        ///
         /// <summary>
         /// Local password. Using for send them from console to PasswordData class
         /// </summary>

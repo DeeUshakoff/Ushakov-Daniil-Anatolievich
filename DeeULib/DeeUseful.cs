@@ -2,6 +2,9 @@
 {
     public static class DeeU
     {
+
+        // Print object
+
         public static void Print(this string Input, ConsoleColor Color = ConsoleColor.White)
         {
             Console.ForegroundColor = Color;
@@ -53,6 +56,9 @@
             Console.ResetColor();
         }
 
+
+        // Params print
+
         public static void Print(params string[] Input)
         {
             foreach (var Item in Input)
@@ -78,6 +84,10 @@
             foreach (var Item in Input)
                 Console.WriteLine(Item);
         }
+
+
+        // Print Line
+
         public static void PrintL(this string input, ConsoleColor Color = ConsoleColor.White)
         {
             Console.ForegroundColor = Color;
@@ -86,11 +96,33 @@
 
             Console.ResetColor();
         }
-
-        // Print extensions:
-
-       
+        public static void PrintL(this int input, ConsoleColor Color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = Color;
+            Console.Write(input);
+            Console.ResetColor();
+        }
+        public static void PrintL(this double input, ConsoleColor Color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = Color;
+            Console.Write(input);
+            Console.ResetColor();
+        }
+        public static void PrintL(this char input, ConsoleColor Color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = Color;
+            Console.Write(input);
+            Console.ResetColor();
+        }
+        public static void PrintL(this bool input, ConsoleColor Color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = Color;
+            Console.Write(input);
+            Console.ResetColor();
+        }
         
+
+        //Print Array
         public static void Print(this int[] source, ConsoleColor Color = ConsoleColor.White)
         {
             Console.ForegroundColor = Color;
@@ -123,7 +155,7 @@
 
 
 
-        // String extensions:
+        // Extensions:
 
         /// <summary>
         /// Repeat string source "count" times. Ex: "6".Repeat(2) = "66"
@@ -147,7 +179,6 @@
 
             return result;
         }
-
         /// <summary>
         /// Returns Int32 from string
         /// </summary>
@@ -178,7 +209,6 @@
             Double.TryParse(source.Replace('.', ','), out double result);
             return result;
         }
-
         /// <summary>
         /// Returns Double from Int32
         /// </summary>
@@ -214,18 +244,43 @@
 
 
 
+        // Array extensions:
 
-        public static int[] Add(int[] source_array, params int[] add) // Add element to the int[] array
+        /// <summary>
+        /// Connect string into one
+        /// </summary>
+        /// <param name="input">string to add</param>
+        /// <returns></returns>
+        public static string Join(params string[] input)
+        {
+            if (input == null)
+                throw new NullReferenceException();
+
+            string result = "";
+
+            foreach (string item in input)
+                result += item;
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Returns combined array
+        /// </summary>
+        /// <param name="source_array">Source to expand</param>
+        /// <param name="add">Added element</param>
+        /// <returns></returns>
+        public static int[] Add(this int[] source_array, params int[] add) // Add element to the int[] array
         {
             int[] result = new int[source_array.Length + add.Length]; // Creating array with needing length
 
             source_array.CopyTo(result, 0); // Copy source array to the new array
             add.CopyTo(result, source_array.Length); // Copy add array or nums to the new array
-
+            
             return result;
         }
-
-        public static double[] Add(double[] source_array, params double[] add) // Add element to the double[] array
+        public static double[] Add(this double[] source_array, params double[] add) // Add element to the double[] array
         {
             double[] result = new double[source_array.Length + add.Length]; // Creating array with needing length
 
@@ -234,8 +289,7 @@
 
             return result;
         }
-
-        public static string[] Add(string[] source_array, params string[] add) // Add element to the string[] array
+        public static string[] Add(this string[] source_array, params string[] add) // Add element to the string[] array
         {
             string[] result = new string[source_array.Length + add.Length]; // Creating array with needing length
 
@@ -251,13 +305,15 @@
         /// <param name="source">Source to calc the length</param>
         /// <param name="afterDot">If true, returns fractional part's length, else: integer part</param>
         /// <returns></returns>
+        
+        // Other extensions:
+        
         public static int Length(this double source, bool afterDot = false)
         {
             if(afterDot)
                 return DeeM.GetFractionalPart(source).Length();
             return source.ToInt().Length();
         }
-
         /// <summary>
         /// Returns the length of the source
         /// </summary>
@@ -269,6 +325,9 @@
         }
 
 
+
+
+        // Other methods:
 
         /// <summary>
         /// Method to wait for console input

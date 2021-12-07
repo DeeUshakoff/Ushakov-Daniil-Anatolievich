@@ -54,13 +54,21 @@ namespace DeeULib
                 return false;
             return true;
         }
-
+        
+        /// <summary>
+        /// Round number. 1.48 to 1.5, 1.32 to 1.3
+        /// </summary>
+        /// <param name="source">Source to round</param>
+        /// <param name="accurancy">nums after dot to round</param>
+        /// <returns></returns>
         public static double Round(this double source, int accurancy)
         {
-            
             return Math.Round(source, accurancy, MidpointRounding.AwayFromZero);
         }
-
+        
+        /// <summary>
+        /// Class Angle: contains Angle Degree, Sin, Cos, Tan, Cot of that Angle
+        /// </summary>
         public class Angle
         {
 
@@ -154,5 +162,7 @@ namespace DeeULib
                 return new Angle(a.Degree * b.Degree);
             }
         }
+
+        
     }
 }

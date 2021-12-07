@@ -14,9 +14,7 @@ namespace Study
             string output = "";
 
             if (source_1 == null || source_2 == null)
-            {
                 return output;
-            }
 
             string[] str_1 = source_1.Split(' ');
             string[] str_2 = source_2.Split(' ');
