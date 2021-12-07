@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Classwork\" />
+    <Folder Include="Homework\hw_8 in hw 7\" />
   </ItemGroup>
 
   <ItemGroup>
