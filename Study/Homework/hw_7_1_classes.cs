@@ -399,9 +399,7 @@ namespace Study
                 return true;
             else if (a.Length < b.Length)
                 return false;
-#pragma warning disable CS0162 // Обнаружен недостижимый код
             for (int i = 0; i < a.Length; i++)
-#pragma warning restore CS0162 // Обнаружен недостижимый код
             {
                 if (a[i] > b[i])
                     return true;

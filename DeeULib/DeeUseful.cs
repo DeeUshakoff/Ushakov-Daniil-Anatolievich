@@ -138,52 +138,77 @@
             if (String.IsNullOrEmpty(source))
                 return result;
             if (count <= 0)
-            {
                 count = 1;
-            }
 
             
 
             for (int i = 0; i < count; i++)
-            {
                 result += source;
-            }
 
             return result;
         }
 
-
+        /// <summary>
+        /// Returns Int32 from string
+        /// </summary>
+        /// <param name="source">Source to convert</param>
+        /// <returns></returns>
         public static int ToInt(this string source)
         {
             Int32.TryParse(source, out int result);
             return result;
         }
+        /// <summary>
+        /// Returns Int32 from Double
+        /// </summary>
+        /// <param name="source">Source to convert</param>
+        /// <returns></returns>
         public static int ToInt(this double source)
         {
-            
             return Convert.ToInt32(source); 
         }
-
-        public static double ToDouble(this string source) // Convert String to Double
+        /// <summary>
+        /// Returns Double from String
+        /// </summary>
+        /// <param name="source">Source to convert</param>
+        /// <returns></returns>
+        public static double ToDouble(this string source)
         {
-            Double.TryParse(source, out double result);
+            
+            Double.TryParse(source.Replace('.', ','), out double result);
             return result;
         }
 
-        public static double ToDouble(this int source) // Convert Int to Double
+        /// <summary>
+        /// Returns Double from Int32
+        /// </summary>
+        /// <param name="source">Source to convert</param>
+        /// <returns></returns>
+        public static double ToDouble(this int source)
         {
             Double.TryParse(source.ToString(), out double result);
             return result;
         }
 
+        /// <summary>
+        /// Returns Int32 from console input
+        /// </summary>
+        /// <returns></returns>
         public static int ReadInt()
         {
             Int32.TryParse(Console.ReadLine(), out int result);
             return result;
         }
+
+        /// <summary>
+        /// Returns Double from console input. Can read input like 1,1 and 1.1
+        /// </summary>
+        /// <returns></returns>
         public static double ReadDouble()
         {
-            Double.TryParse(Console.ReadLine(), out double result);
+            var input = Console.ReadLine().Replace('.', ',');
+            
+            Double.TryParse(input, out double result);
             return result;
         }
 
@@ -221,7 +246,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Returns length of the source. preDot or afterDot
         /// </summary>
         /// <param name="source">Source to calc the length</param>
         /// <param name="afterDot">If true, returns fractional part's length, else: integer part</param>
@@ -229,9 +254,7 @@
         public static int Length(this double source, bool afterDot = false)
         {
             if(afterDot)
-            {
                 return DeeM.GetFractionalPart(source).Length();
-            }
             return source.ToInt().Length();
         }
 

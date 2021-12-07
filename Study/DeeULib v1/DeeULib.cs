@@ -94,9 +94,7 @@ namespace Study
                 try
                 {
                     if (is_line)
-#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL, для параметра "s" в "double double.Parse(string s)".
                         output = Double.Parse(Console.ReadLine());
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL, для параметра "s" в "double double.Parse(string s)".
                     else
                         output = Console.Read();
                     return output;
