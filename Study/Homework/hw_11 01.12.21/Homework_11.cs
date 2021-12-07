@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Study
 {
-
+    // Интерфейсы реализованы в Homework_7.cs, т.к именно там находятся классы CNum, RationalFraction
     public static class StringExtension
     {
         public static string StangeJoin(this string source_1, string source_2)
