@@ -8,10 +8,6 @@ namespace Study
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             
-
-            
-
-            DeeU.Wait();
         }
 
     }

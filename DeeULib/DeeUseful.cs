@@ -1,5 +1,9 @@
 ﻿namespace DeeULib
 {
+
+    /// <summary>
+    /// Useful library for simplifying the work 
+    /// </summary>
     public static class DeeU
     {
 
@@ -247,11 +251,12 @@
         // Array extensions:
 
         /// <summary>
-        /// Connect string into one
+        /// Connect strings into one
         /// </summary>
-        /// <param name="input">string to add</param>
+        /// <param name="separator">Separator between strings in new string</param>
+        /// <param name="input">String to add</param>
         /// <returns></returns>
-        public static string Join(params string[] input)
+        public static string Join(string separator, params string[] input)
         {
             if (input == null)
                 throw new NullReferenceException();
@@ -259,11 +264,46 @@
             string result = "";
 
             foreach (string item in input)
-                result += item;
+                result += item + separator;
 
             return result;
         }
+        /// <summary>
+        /// Connect strings into one
+        /// </summary>
+        /// <param name="separator">Separator between strings in new string</param>
+        /// <param name="input">String to add</param>
+        /// <returns></returns>
+        public static string Join(string separator, params int[] input)
+        {
+            if (input == null)
+                throw new NullReferenceException();
 
+            string result = "";
+
+            foreach (var item in input)
+                result += item.ToString() + separator;
+
+            return result;
+        }
+        /// <summary>
+        /// Connect strings into one
+        /// </summary>
+        /// <param name="separator">Separator between strings in new string</param>
+        /// <param name="input">String to add</param>
+        /// <returns></returns>
+        public static string Join(string separator, params double[] input)
+        {
+            if (input == null)
+                throw new NullReferenceException();
+
+            string result = "";
+
+            foreach (var item in input)
+                result += item.ToString() + separator;
+
+            return result;
+        }
 
         /// <summary>
         /// Returns combined array
@@ -324,9 +364,107 @@
             return source.ToString().Length;
         }
 
+        public static int Find(this string source, char find, bool returnFirstEntry = false)
+        {
+            int index = -1;
+
+            for(int i = 0; i < source.Length; i++)
+            {
+                if (source[i] == find)
+                {
+                    if (returnFirstEntry) return i;
+                    index = i;
+                }
+            }
+            return index;
+        }
+
+        // File managment
 
 
+        /// <summary>
+        /// Creates file in certain directory
+        /// </summary>
+        /// <param name="filename">Name of the file, please set up file extension</param>
+        /// <param name="directory">Directory where the file will be created</param>
+        /// <param name="rewrite">Rewrite file, if file with same filename alredy exist in directory</param>
+        public static void FileCreate(string filename, string directory, bool rewrite = false)
+        {
+            if(!Directory.Exists(directory))
+            {
+                Print("Directory not found", ConsoleColor.Red);
+                return;
+            }
+            string path = $"{directory}\\{filename}";
 
+            if(File.Exists(path) && !rewrite)
+            {
+                Print("File already exist", ConsoleColor.Red);
+                return;
+            }
+            
+            File.Create(path);
+
+        }
+        /// <summary>
+        /// Creates file in certain directory
+        /// </summary>
+        /// <param name="path">Path to create file including the file name. Ex: C:\file.txt</param>
+        /// <param name="rewrite">Rewrite file, if file with same filename alredy exist</param>
+        public static void FileCreate(string path, bool rewrite = false)
+        {
+
+            if(!Directory.Exists(path.Substring(0, path.LastIndexOf('\\'))))
+            {
+                Print("Directory not found", ConsoleColor.Red);
+                return;
+            }
+
+            if (File.Exists(path) && !rewrite)
+            {
+                Print("File already exist", ConsoleColor.Red);
+                return;
+            }
+
+            File.Create(path);
+        }
+
+
+        /// <summary>
+        /// WriteLine text into file
+        /// </summary>
+        /// <param name="path">Path of the file</param>
+        /// <param name="text">Text to write</param>
+        public static void FileWrite(string path, string text)
+        {
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                
+                outputFile.Write(text);
+                outputFile.Close();
+                outputFile.Dispose();
+                
+            }
+        }
+
+        /// <summary>
+        /// Write text into file
+        /// </summary>
+        /// <param name="path">Path of the file</param>
+        /// <param name="text">Text to write</param>
+        public static void FileWriteL(string path, string text)
+        {
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+
+                outputFile.WriteLine(text);
+                outputFile.Close();
+                outputFile.Dispose();
+
+            }
+        }
+
+        
         // Other methods:
 
         /// <summary>

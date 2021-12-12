@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace DeeULib
 {
+    /// <summary>
+    /// Useful library for simplifying the work with math
+    /// </summary>
     public static class DeeM
     {
         /// <summary>
@@ -44,7 +43,7 @@ namespace DeeULib
         /// <summary>
         /// Returns True, if input is integer, else False
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="source">Source to checkself</param>
         /// <returns></returns>
         public static bool IsInt(this double source)
         {
@@ -118,7 +117,7 @@ namespace DeeULib
             /// <summary>
             /// Returns Sin of that angle
             /// </summary>
-            /// <returns></returns>
+            /// <returns>Double</returns>
             public double GetSin()
             {
                 return sin;
@@ -126,7 +125,7 @@ namespace DeeULib
             /// <summary>
             /// Returns Cos of that angle
             /// </summary>
-            /// <returns></returns>
+            /// <returns>Double</returns>
             public double GetCos()
             {
                 return cos;
@@ -134,7 +133,7 @@ namespace DeeULib
             /// <summary>
             /// Returns Tan of that angle
             /// </summary>
-            /// <returns></returns>
+            /// <returns>Double</returns>
             public double GetTan()
             {
                 return tan;
@@ -142,13 +141,20 @@ namespace DeeULib
             /// <summary>
             /// Returns Cot of that angle
             /// </summary>
-            /// <returns></returns>
+            /// <returns>Double</returns>
             public double GetCot()
             {
                 return cot;
             }
 
-
+            /// <summary>
+            /// Returns Degree as string
+            /// </summary>
+            /// <returns>String</returns>
+            public override string ToString()
+            {
+                return Degree.ToString();
+            }
             public static Angle operator +(Angle a, Angle b)
             {
                 return new Angle(a.Degree + b.Degree);

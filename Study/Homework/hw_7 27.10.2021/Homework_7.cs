@@ -363,7 +363,7 @@ namespace Study
         public int CompareTo(object o)
         {
 
-            RationalFraction toCompare = (RationalFraction)o;
+            var toCompare = (RationalFraction)o;
             if (o != null && this != null)
             {
                 if (this.value > toCompare.value)
@@ -589,7 +589,7 @@ namespace Study
             r_Y = y;
         }
         
-        public void Add(Vector2D input, bool plus = true)
+        protected void Add(Vector2D input, bool plus = true)
         {
             int sign = 1;
             if (!plus) sign = -1;
