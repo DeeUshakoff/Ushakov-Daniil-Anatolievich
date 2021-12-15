@@ -379,6 +379,20 @@
             return index;
         }
 
+
+        public static double CheckLessZero(double input)
+        {
+            if (input < 0)
+                return 0;
+            return input;
+        }
+
+        public static int CheckLessZero(int input)
+        {
+            if (input < 0)
+                return 0;
+            return input;
+        }
         // File managment
 
 
@@ -437,14 +451,14 @@
         /// <param name="text">Text to write</param>
         public static void FileWrite(string path, string text)
         {
-            using (StreamWriter outputFile = new StreamWriter(path))
-            {
-                
+            var outputFile = new StreamWriter(path, true);
+
+
                 outputFile.Write(text);
                 outputFile.Close();
                 outputFile.Dispose();
                 
-            }
+            
         }
 
         /// <summary>
@@ -454,7 +468,7 @@
         /// <param name="text">Text to write</param>
         public static void FileWriteL(string path, string text)
         {
-            using (StreamWriter outputFile = new StreamWriter(path))
+            using (StreamWriter outputFile = new StreamWriter(path, true))
             {
 
                 outputFile.WriteLine(text);
