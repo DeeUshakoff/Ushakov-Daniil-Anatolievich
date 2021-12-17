@@ -17,15 +17,9 @@ namespace Study
 
             stack.Add(m_1, m_2, m_3, m_4, m_5);
             
-            stack.Read();
-            stack.Read();
+            stack.Read().ToString().Print();
 
-            stack.Print();
-
-            m_1.Repair(@"C:\Users\DeeUsh\Desktop\Tor Browser\m.txt");
-            m_2.Repair(@"C:\Users\DeeUsh\Desktop\Tor Browser\m.txt");
-            m_3.Repair(@"C:\Users\DeeUsh\Desktop\Tor Browser\m.txt");
-
+            
 
         }
 

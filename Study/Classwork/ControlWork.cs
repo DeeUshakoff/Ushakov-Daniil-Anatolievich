@@ -120,8 +120,6 @@ namespace Study
                 $"Vibrance level is {VibranceLevel}\n" +
                 $"Weight is {Weight}\n";
         }
-
-
     }
 
     public static class ConstructionMachineryExt
@@ -151,14 +149,12 @@ namespace Study
             this.machines = machine;
         }
 
-        public Stack()
-        {
-        }
-
-
+        public Stack() { }
 
         public ConstructionMachine Read()
         {
+            if (machines.Length == 0)
+                throw new Exception("Stack is empty");
             var result = machines[machines.Length-1];
 
             ConstructionMachine[] new_machines = new ConstructionMachine[machines.Length-1];
@@ -179,7 +175,4 @@ namespace Study
                 DeeU.Print(machine.ToString());
         }
     }
-
-    
-
 }   

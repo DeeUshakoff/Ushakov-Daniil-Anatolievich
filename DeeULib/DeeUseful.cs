@@ -453,10 +453,9 @@
         {
             var outputFile = new StreamWriter(path, true);
 
+            outputFile.Write(text);
 
-                outputFile.Write(text);
-                outputFile.Close();
-                outputFile.Dispose();
+            outputFile.Dispose();
                 
             
         }
