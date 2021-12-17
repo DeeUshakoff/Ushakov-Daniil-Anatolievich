@@ -124,9 +124,16 @@
             Console.Write(input);
             Console.ResetColor();
         }
-        
+
 
         //Print Array
+        public static void Print(this string[] source, ConsoleColor Color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = Color;
+            foreach (var value in source)
+                Console.WriteLine(value);
+            Console.ResetColor();
+        }
         public static void Print(this int[] source, ConsoleColor Color = ConsoleColor.White)
         {
             Console.ForegroundColor = Color;
@@ -477,8 +484,33 @@
             }
         }
 
-        
+
         // Other methods:
+        public static DateTime ReadTime()
+        {
+
+            DeeU.PrintL("Year: ");
+            int year = DeeU.ReadInt();
+
+            DeeU.PrintL("Month: ");
+            int month = DeeU.ReadInt();
+
+            DeeU.PrintL("Day: ");
+            int day = DeeU.ReadInt();
+
+            DeeU.PrintL("Hour: ");
+            int hour = DeeU.ReadInt();
+
+            DeeU.PrintL("Minute: ");
+            int minute = DeeU.ReadInt();
+
+            DeeU.PrintL("Second: ");
+            int second = DeeU.ReadInt();
+
+
+            return new DateTime(year, month, day, hour, minute, second);
+        }
+
 
         /// <summary>
         /// Method to wait for console input
