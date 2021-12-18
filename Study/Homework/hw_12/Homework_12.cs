@@ -264,7 +264,7 @@ namespace Study
         /// <summary>
         /// Creates file with current time in directory
         /// </summary>
-        public static void Task_4(string directoryPath)
+        public void Task_4(string directoryPath)
         {
             File.WriteAllText(@$"{directoryPath}\task_4(1).txt", DateTime.Now.ToString());
             File.WriteAllText(@$"{directoryPath}\task_4(2).txt", DateTime.Now.ToString());
@@ -273,7 +273,7 @@ namespace Study
         /// <summary>
         /// Returns date and time of the newest file in directory
         /// </summary>
-        public static void Task_4_1(string directoryPath)
+        public void Task_4_1(string directoryPath)
         {
 
             string[] files = Directory.GetFiles(directoryPath);
@@ -289,5 +289,235 @@ namespace Study
 
             DeeU.Print($"{newestFile}\n{File.GetLastWriteTime(newestFile)}", ConsoleColor.Green);
         }
+    }
+    public struct Match : IComparable
+    {
+        public string TeamName;
+        public DateTime DateOfGame;
+
+        private int scoresCount = 0;
+        public int ScoresCount
+        {
+            get
+            {
+                return scoresCount;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    scoresCount = value;
+                    return;
+                }
+            }
+        }
+
+        public Match(string teamName, DateTime dateOfGame, int scoresCount)
+        {
+            TeamName = teamName;
+            DateOfGame = dateOfGame;
+            ScoresCount = scoresCount;
+        }
+        public static Match[] ReadMatches(string path)
+        {
+            string[] FileText = File.ReadAllLines(path);
+            Match[] result = { };
+
+            foreach (var el in FileText)
+            {
+                string[] line = el.Split(' ');
+
+                if (line.Length != 3) continue;
+
+                string[] tmpTimeString = line[1].Split('.');
+
+                var DateOfGame = new DateTime(tmpTimeString[0].ToInt(),
+                    tmpTimeString[1].ToInt(), tmpTimeString[2].ToInt(),
+                    tmpTimeString[3].ToInt(), tmpTimeString[4].ToInt(), tmpTimeString[5].ToInt());
+                result = result.Add(new Match(line[0], DateOfGame, line[2].ToInt()));
+            }
+
+            Array.Sort(result);
+
+            return result;
+        }
+        public static void LeaderInPeriod(Match[] matches, DateTime start, DateTime end)
+        {
+
+            string leader_name = "";
+            int leader_scores = -1;
+
+            Dictionary<string, int> match_dict = new Dictionary<string, int>();
+
+            
+            foreach (var match in matches)
+            {
+                if(match.DateOfGame >= start && match.DateOfGame <= end)
+                {
+                    if (match_dict.ContainsKey(match.TeamName))
+                        match_dict[match.TeamName] += match.ScoresCount;
+                    else
+                        match_dict.Add(match.TeamName, match.ScoresCount);
+                }
+            }
+            
+            
+            
+            foreach (var el in match_dict)
+            {
+
+                if (el.Value > leader_scores)
+                {
+                    leader_name = el.Key;
+                    leader_scores = el.Value;
+                }
+            }
+
+            DeeU.Print($"Leader from {start.ToShortDateString()} to {end.ToShortDateString()} is {leader_name} with {leader_scores} scores");
+        }
+        public void Print()
+        {
+            DeeU.Print($"{TeamName} {DateOfGame} {ScoresCount}");
+        }
+        
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            var other = (Match)obj;
+
+            if (obj != null)
+            {
+                if (this.ScoresCount > other.ScoresCount)
+                    return -1;
+                else if (this.ScoresCount < other.ScoresCount)
+                    return 1;
+                else
+                    return 0;
+            }
+            else
+                throw new Exception("Unnable to compare objects");
+        }
+    }
+
+
+    
+    public static class HW_12_Ext
+    {
+        public static Match[] Add(this Match[] source_array, Match add)
+        {
+            Match[] result = new Match[source_array.Length + 1]; // Creating array with needing length
+
+            source_array.CopyTo(result, 0); // Copy source array to the new array
+            result[result.Length-1] = add; // Copy add array or nums to the new array
+
+            return result;
+        }
+        public static void Print(this Match[] source_array)
+        {
+            foreach (var el in source_array)
+                el.Print();
+        }
+        public static void Print(this List<Exam> source)
+        {
+            foreach (var el in source)
+                el.Print();
+        }
+    }
+    public struct Exam : IComparable
+    {
+        public string TeacherName;
+
+        public DateTime DateOfExam;
+        
+        
+        
+        public Exam(string teacherName, DateTime dateOfExam)
+        {
+            TeacherName = teacherName; DateOfExam = dateOfExam; 
+        }
+
+        public static Exam AddDay(Exam exam)
+        {
+            return new Exam(exam.TeacherName, exam.DateOfExam.AddDays(1));
+        }
+
+        public static List<Exam> ReadData(string path)
+        {
+            string[] FileText = File.ReadAllLines(path);
+            List<Exam> result = new List<Exam>();
+
+            foreach (var el in FileText)
+            {
+                string[] line = el.Split(' ');
+
+                if (line.Length != 2) continue;
+
+                string[] tmpTimeString = line[1].Split('.');
+
+                var DateOfGame = new DateTime(tmpTimeString[0].ToInt(),
+                    tmpTimeString[1].ToInt(), tmpTimeString[2].ToInt(),
+                    tmpTimeString[3].ToInt(), tmpTimeString[4].ToInt(), 0);
+                result.Add(new Exam(line[0], DateOfGame));
+            }
+
+            result.Sort();
+
+            return result;
+        }
+
+        public static List<Exam> SortedExams(List<Exam> exams)
+        {
+            exams.Sort();
+
+            List<Exam> sortedExams = new List<Exam>();
+            List<string> dates = new List<string>();
+
+            for (int i = 0; i < exams.Count; i++)
+            {
+                if (dates.Contains(exams[i].DateOfExam.ToShortDateString()))
+                {
+                    while (dates.Contains(exams[i].DateOfExam.ToShortDateString()))
+                        exams[i] = Exam.AddDay(exams[i]);
+
+                    sortedExams.Add(exams[i]);
+                    dates.Add(exams[i].DateOfExam.ToShortDateString());
+                }
+                else
+                {
+                    dates.Add(exams[i].DateOfExam.ToShortDateString());
+                    sortedExams.Add(exams[i]);
+                }
+            }
+            return sortedExams;
+            
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            var other = (Exam)obj;
+
+            var a = DateOnly.FromDateTime(DateOfExam);
+            var b = DateOnly.FromDateTime(other.DateOfExam);
+            if (obj != null)
+            {
+                if (a > b)
+                    return 1;
+                else if (a < b)
+                    return -1;
+                else
+                    return 0;
+            }
+            else
+                throw new Exception("Unnable to compare objects");
+        }
+
+        public void Print()
+        {
+            DeeU.Print($"{TeacherName} {DateOfExam.ToLongDateString()} {DateOfExam.ToShortTimeString()}");
+        }
+        
     }
 }
