@@ -136,6 +136,7 @@
         }
         public static void Print(this int[] source, ConsoleColor Color = ConsoleColor.White)
         {
+            if (source == null) return;
             Console.ForegroundColor = Color;
             foreach (var value in source)
                 Console.WriteLine(value);

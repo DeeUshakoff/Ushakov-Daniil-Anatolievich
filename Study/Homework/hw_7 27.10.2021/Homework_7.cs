@@ -247,26 +247,21 @@ namespace Study
 
         public void Add(RationalFraction input, bool isPlus = true)
         {
+            int k = 1;
+            if (!isPlus) k = -1;
 
-            if (Denumenator == input.Denumenator && isPlus)
+            if (Denumenator == input.Denumenator)
             {
-                Numerator += input.Numerator;
+                Numerator += k*input.Numerator;
                 Reduce();
                 return;
             }
-            else if (Denumenator == input.Denumenator && !isPlus)
-            {
-                Numerator -= input.Numerator;
-                Reduce();
-                return;
-            }
+            
 
 
             var output = new RationalFraction(1, Denumenator * input.Denumenator);
-            if (isPlus)
-                output.Numerator = Numerator * output.Denumenator / Denumenator + input.Numerator * output.Denumenator / input.Denumenator;
-            else
-                output.Numerator = (Numerator * output.Denumenator / Denumenator) - (input.Numerator * output.Denumenator / input.Denumenator);
+
+            output.Numerator = Numerator * output.Denumenator / Denumenator + k*input.Numerator * output.Denumenator / input.Denumenator;
             output.Reduce();
             Numerator = output.Numerator;
             Denumenator = output.Denumenator;
@@ -286,6 +281,11 @@ namespace Study
             return output;
         }
 
+        public static RationalFraction operator -(RationalFraction a, RationalFraction b)
+        {
+            a.Add(b, false);
+            return a;
+        }
         public void Multiply(RationalFraction input)
         {
             Numerator *= input.Numerator;
