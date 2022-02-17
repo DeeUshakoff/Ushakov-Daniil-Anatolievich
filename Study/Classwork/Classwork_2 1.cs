@@ -73,8 +73,12 @@ namespace Study
             }
             var sr = new StreamReader(path);
 
+            var h = new string[] { "12", "23", "23" };
+            
+            
+
             var array = sr.ReadLine().Split(' ').
-                Where(x => !string.IsNullOrWhiteSpace(x)).
+                Where(x => x.IsNum()).
                 Select(x => x.ToInt()).ToArray();
             return array;
         }

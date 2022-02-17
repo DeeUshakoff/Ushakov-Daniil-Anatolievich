@@ -58,9 +58,7 @@ namespace Study
             var output = new CNum();
 
             foreach (var num in input)
-            {
                 output.Add(num);
-            }
             return output;
         }
         public void Add(CNum input)

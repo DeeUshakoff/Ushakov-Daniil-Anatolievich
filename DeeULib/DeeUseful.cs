@@ -1,4 +1,5 @@
-﻿namespace DeeULib
+﻿using System.Text;
+namespace DeeULib
 {
 
     /// <summary>
@@ -165,7 +166,21 @@
         }
 
 
+        public static bool IsNum(this string source)
+        {
+            if(String.IsNullOrWhiteSpace(source)) return false;
 
+            try
+            {
+                var num = int.Parse(source);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            //return true;
+        }
 
         // Extensions:
 
@@ -241,7 +256,9 @@
             Int32.TryParse(Console.ReadLine(), out int result);
             return result;
         }
-
+        public static double ToDouble(this double[] source) => String.Join("", source).ToDouble();
+        public static double ToDouble(this List<int> source) => String.Join("", source).ToDouble();
+        public static double ToDouble(this List<double> source) => String.Join("", source).ToDouble();
         /// <summary>
         /// Returns Double from console input. Can read input like 1,1 and 1.1
         /// </summary>
