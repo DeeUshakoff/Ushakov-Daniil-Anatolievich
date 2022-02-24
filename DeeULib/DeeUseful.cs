@@ -345,6 +345,8 @@ namespace DeeULib
             
             return result;
         }
+
+       
         public static double[] Add(this double[] source_array, params double[] add) // Add element to the double[] array
         {
             double[] result = new double[source_array.Length + add.Length]; // Creating array with needing length

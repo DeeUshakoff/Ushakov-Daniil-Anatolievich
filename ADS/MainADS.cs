@@ -1,5 +1,5 @@
 ﻿using DeeULib;
-
+using ADS.Homework;
 namespace ADS
 {
     public static class MainADS
@@ -18,8 +18,15 @@ namespace ADS
 
 
                 //String.Join(' ', ADS_Unique.GetUnique(@"D:\123.txt")).Print();
-                ADS_MaxValue.GetMaxValue(40, 1, 9).Print();
+                //ADS_MaxValue.GetMaxValue(40, 1, 9).Print();
 
+                var s = new CustomDictionary<string>();
+                s.Add("d", 3);
+                s.Add("d", 3);
+                s.Add("f", 3);
+                s.ChangeValue("f", 1231321);
+                s.ClearValue("d");
+                s.Print();
             }
             #endregion
         }

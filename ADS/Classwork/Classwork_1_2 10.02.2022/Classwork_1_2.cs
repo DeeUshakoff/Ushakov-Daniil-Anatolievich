@@ -4,6 +4,7 @@ namespace ADS
 {
     public static class ADS_Sort
     {
+        
         public static int[]? Sort(params int[][] array)
         {
             int[] result = Array.Empty<int>();

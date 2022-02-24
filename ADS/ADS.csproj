@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Homework\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DeeULib\DeeULib.csproj" />
   </ItemGroup>
 
