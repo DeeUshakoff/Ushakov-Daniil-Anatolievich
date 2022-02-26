@@ -13,16 +13,15 @@ namespace ADS.Homework
         public void Task_3(double[] input)
         {
             var dic = new CustomDictionary<double>();
+
             foreach (var el in input) dic.Add(el, 1);
 
             var mostOftenValue = dic.GetMostOftenPair();
 
             if(mostOftenValue.Value > input.Length / 2)
-            {
                 $"Most often value: {mostOftenValue.Key}, {mostOftenValue.Value}/{input.Length} elements are {mostOftenValue.Key}".Print();
-                return;
-            }
-            "No such nums there".Print(ConsoleColor.Red);
+            else
+                "No such nums there".Print(ConsoleColor.Red);
             
         }
     }
@@ -56,15 +55,7 @@ namespace ADS.Homework
             AddNewKey(new CustomPair<T>(key, value));
         }
 
-        private void AddNewKey(CustomPair<T> pair) 
-        {
-            var result = new CustomPair<T>[elements.Length + 1];
-
-            elements.CopyTo(result, 0);
-            result[^1] = pair;
-
-            elements = result;
-        }
+        private void AddNewKey(CustomPair<T> pair) => elements = elements.Append(pair).ToArray();
         public double GetKeyValue(T key) => elements.Where(x => x.IsKeyEquals(key)).Select(x => x.Value).First();
 
         public void Print()
@@ -80,6 +71,8 @@ namespace ADS.Homework
                 if (elements[i].IsKeyEquals(key)) { elements[i].Value = value; return; }
         }
         public void ClearValue(T key) => Add(key, -GetKeyValue(key));
+
+        public void ClearAllValues() { }
         public CustomPair<T> GetMostOftenPair() => elements.OrderBy(x => x.Value).Reverse().First();
         public IEnumerator<CustomPair<T>> GetEnumerator() => new CustomDictionaryEnumerator<T>(elements);
 

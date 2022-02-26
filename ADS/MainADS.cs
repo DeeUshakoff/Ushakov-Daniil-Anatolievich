@@ -20,13 +20,17 @@ namespace ADS
                 //String.Join(' ', ADS_Unique.GetUnique(@"D:\123.txt")).Print();
                 //ADS_MaxValue.GetMaxValue(40, 1, 9).Print();
 
-                var s = new CustomDictionary<string>();
-                s.Add("d", 3);
-                s.Add("d", 3);
-                s.Add("f", 3);
-                s.ChangeValue("f", 1231321);
-                s.ClearValue("d");
-                s.Print();
+                var f = new int[] { 12, 5, 6, 1,3 };
+                f = f.Append(123).ToArray();
+                f.Print();
+
+                //var s = new CustomDictionary<string>();
+                //s.Add("d", 3);
+                //s.Add("d", 3);
+                //s.Add("f", 3);
+                //s.ChangeValue("f", 1231321);
+                //s.ClearValue("d");
+                //s.Print();
             }
             #endregion
         }
