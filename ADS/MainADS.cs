@@ -6,8 +6,10 @@ namespace ADS
     {
         public static void Main()
         {
-            Classwork_1(true);
-
+            //Classwork_1(true);
+            
+            //Homework_1.Task_6(111, 2, 13);
+            
             #region "Classwork 1"
             void Classwork_1(bool run = false)
             {
@@ -34,6 +36,7 @@ namespace ADS
             }
             #endregion
         }
+        
     }
     
 }

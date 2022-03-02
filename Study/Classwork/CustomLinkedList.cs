@@ -80,9 +80,24 @@ namespace Programming.Classwork
             count++;
         }
         
-        
+        public void SwapAll()
+        {
+            var headCopy = head;
+
+            for (int i = 1; i <= count-2; i++)
+            {
+                AddBefore(headCopy, i);
+                //Remove(i);
+                if (headCopy == null)
+                    throw new ArgumentOutOfRangeException();
+                headCopy = headCopy.GetNext();
+            }
+
+            count++;
+        }
         public void AddAfter(CustomNode<T> node, int index)
         {
+            node = new CustomNode<T>(node.GetValue());
             if (index == 0) { AddFirst(node); return; }
             if (index == count) { AddLast(node); return; }
 
@@ -101,10 +116,16 @@ namespace Programming.Classwork
             count++;
         }
 
-        public void AddBefore(CustomNode<T> node)
+        public void AddAround(CustomNode<T> node, int index)
         {
+            //if(index == 0) { AddFirst(node); return; }
+            //if(index == count) { AddLast(node); return; }
 
+            AddBefore(node, index);
+            AddAfter(node, index+1);
+           
         }
+        public void AddBefore(CustomNode<T> node, int index) => AddAfter(node, index - 1);
 
         public void RemoveLast()
         {

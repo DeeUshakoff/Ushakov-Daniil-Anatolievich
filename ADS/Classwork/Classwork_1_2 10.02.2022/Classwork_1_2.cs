@@ -1,6 +1,6 @@
 ﻿using DeeULib;
 using System.Text;
-namespace ADS
+namespace ADS.Homework
 {
     public static class ADS_Sort
     {
@@ -96,7 +96,7 @@ namespace ADS
             (from variation in GetPermutations(value.ToList(), new List<int>())
              select variation.ToDouble()).Max();
 
-        static IEnumerable<List<int>> GetPermutations(List<int> source, List<int> without)
+        public static IEnumerable<List<int>> GetPermutations(List<int> source, List<int> without)
         {
             if (source.Where(x => x < 0).Any() || source.Count == 0) throw new Exception("Negative inside / Null reference");
 

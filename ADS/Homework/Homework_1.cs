@@ -10,7 +10,7 @@ namespace ADS.Homework
 {
     public class Homework_1
     {
-        public void Task_3(double[] input)
+        public static void Task_3(double[] input)
         {
             var dic = new CustomDictionary<double>();
 
@@ -22,7 +22,46 @@ namespace ADS.Homework
                 $"Most often value: {mostOftenValue.Key}, {mostOftenValue.Value}/{input.Length} elements are {mostOftenValue.Key}".Print();
             else
                 "No such nums there".Print(ConsoleColor.Red);
-            
+        }
+        public static void Task_2(int[] input) =>
+            input.OrderBy(x => x).
+            Aggregate((IEnumerable<IEnumerable<int>>)new List<IEnumerable<int>>()
+            { Enumerable.Empty<int>() }, (x, y) => x.Concat(x.Select(z => z.Concat(new List<int>() { y })))).
+            Select(x => x.ToList()).ToList().
+            ForEach(x => String.Join(" ", x).
+            Print());
+
+        public static void Task_6(int a, int b, int c)
+        {
+            var a_permuts = GetAllPermutations(AsList(a));
+            var b_permuts = GetAllPermutations(AsList(b));
+
+            foreach (var el_a in a_permuts)
+                foreach (var el_b in b_permuts)
+                    if (el_a.ToInt() + el_b.ToInt() == c)
+                    { $"YES, {el_a.ToInt()} + {el_b.ToInt()} = {c}".Print(ConsoleColor.Green); return; }
+            "NOPE".Print(ConsoleColor.Red); return;
+
+            List<int> AsList(int input) => input.ToString().ToCharArray().Select(x => x.ToString().ToInt()).ToList();
+
+            string[] GetAllPermutations(List<int> input)
+            {
+                var result = Array.Empty<string>();
+                GetAllPermutationsCore(input, ref result);
+                return result;
+            }
+
+            void GetAllPermutationsCore(List<int> input, ref string[] result, string current = "")
+            {
+                if (input.Count == 0) { result = result.Append(current).ToArray(); return; }
+
+                for(int i = 0; i < input.Count; i++)
+                {  
+                    var newInput = new List<int>(input);
+                    newInput.RemoveAt(i);
+                    GetAllPermutationsCore(newInput, ref result, current + input[i]);
+                }
+            }
         }
     }
     public class CustomPair<T>
