@@ -1,9 +1,6 @@
 ﻿using DeeULib;
 using Programming.Classwork;
-using Programming.Homework;
-using System.Diagnostics;
-
-namespace Study
+namespace Programming
 {
     public class MainProgramming
     {
@@ -11,57 +8,31 @@ namespace Study
 
         public static void Main()
         {
-            //var s = new Classwork_2_1(@"D:\123.txt");
-            ////s.ReadFromFile(@"D:\123.txt").Print();
-            //s.Task_8(182, 1);
-            ////s.Task_6(18);
-            //s.Task_1();
+            var queue = new ControlWork_21_03_2022.CustomQueue<int>();
+            var node = new ControlWork_21_03_2022.Node<int>(1);
+            var node1 = new ControlWork_21_03_2022.Node<int>(2);
+            var node2 = new ControlWork_21_03_2022.Node<int>(3);
+            var node3 = new ControlWork_21_03_2022.Node<int>(4);
+            var node4 = new ControlWork_21_03_2022.Node<int>(46);
+            var node5 = new ControlWork_21_03_2022.Node<int>(46);
 
-            //s.Task_2();
+            var nodes = new[] { node1, node2, node3, node4, node5 };
 
+            queue.Enqueue(node);
+            queue.Enqueue(node1);
+            queue.Enqueue(node2);
+            queue.Enqueue(node3);
 
+            queue.Remove(0);
+            queue.ToString().Print();
+            //queue.Size().Print();
+            //var t = queue.Dequeue();
 
-            //var node = new CustomNode<int>(2);
-            //var node1 = new CustomNode<int>(5);
-            //var node2 = new CustomNode<int>(232);
+            //t.ToString().Print();
+            //String.Join(" ", queue.GetOddEven()).Print();
+            //list.Contains(new CustomNode<int>( 1)).Print();
 
-
-            //var list = new CustomLinkedList<int>(node);
-
-            //list.AddLast(node1, node2);
-            ////list.ToString().Print();
-            //list.SwapAll();
-
-            //list.AddAfter(new CustomNode<int>(121), 0);
-            //list.AddBefore(new CustomNode<int>(121), 1);
-            //list.AddAfter(new CustomNode<int>(121), 1);
-
-
-            //list.RemovePenult();
-            //list.Remove(0);
-            //list.head.GetNext().GetNext().ToString().Print();
-            //list.ToString().Print();
-            //list.Count().Print();
-            //node.ToString().Print();
-
-            var coll = new CustomArrayCollecton<int>();
-            coll.AddRange(1, 2, 3);
-            coll.Insert(2, 45);
-            //coll.Reverse();
-
-
-            //var stopwatch = new Stopwatch();
-
-            //stopwatch.Start();
-            //coll.Remove(1);
-            //stopwatch.Stop();
-
-            //stopwatch.ElapsedMilliseconds.ToString().Print();
-
-            coll.ToString().Print();
         }
-        
-        
     }
 
 }

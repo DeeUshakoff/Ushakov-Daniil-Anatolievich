@@ -211,11 +211,104 @@ namespace Programming.Classwork
 
     }
 
+    public class DoublyLinkedList<T> : IEnumerable<CustomNode<T>>
+    {
+        public CustomNode<T> head;
+        public CustomNode<T> tail;
+
+        private int count;
+        public int Count { get { return count; } }
+        public bool IsEmpty { get { return count == 0; } }
+        public void Add(CustomNode<T> node)
+        {
+            if (head == null)
+                head = node;
+            else
+            {
+                tail.ChangeNext(node);
+                node.ChangePrevious(tail);
+            }
+            tail = node;
+            count++;
+        }
+        public void AddFirst(CustomNode<T> node)
+        {
+            CustomNode<T> temp = head;
+            node.ChangeNext(temp);
+            head = node;
+            if (count == 0)
+                tail = head;
+            else
+                temp.ChangePrevious(node);
+            count++;
+        }
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+            count = 0;
+        }
+        public bool Contains(CustomNode<T> node) => this.Where(x => x.Equals(node)).Any();
+        public void Remove(CustomNode<T> node)
+        {
+            CustomNode<T> current = head;
+
+            while (current != null)
+            {
+                if (current.Equals(node)) break;
+                current = current.GetNext();
+            }
+            if (current != null)
+            {
+                if (current.GetNext() != null)
+                    current.GetNext().ChangePrevious(current.GetPrevious());
+                else
+                    tail = current.GetPrevious();
+
+                if (current.GetPrevious() != null)
+                    current.GetPrevious().ChangeNext(current.GetNext());
+                else
+                    head = current.GetNext();
+                count--;
+            }
+        }
+        public void RemoveHead()
+        {
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)this).GetEnumerator();
+
+        IEnumerator<CustomNode<T>> IEnumerable<CustomNode<T>>.GetEnumerator()
+        {
+            CustomNode<T> current = head;
+            while (current != null)
+            {
+                yield return current;
+                current = current.GetNext();
+            }
+        }
+
+        public IEnumerable<CustomNode<T>> BackEnumerator()
+        {
+            
+            CustomNode<T> current = tail;
+            while (current != null)
+            {
+                yield return current;
+                current = current.GetPrevious();
+            }
+        }
+        public override string ToString() => String.Join(" ", this);
+        public string ToStringReversed() => String.Join(" ", BackEnumerator());
+    }
+
     public class CustomLinkedListEnumenator<T> : IEnumerator <CustomNode<T>>
     {
         CustomNode<T> next;
         public CustomLinkedListEnumenator(CustomNode<T> head)
         {
+            
             next = new CustomNode<T>(head.GetValue());
             next.ChangeNext(head);
         }
@@ -243,7 +336,7 @@ namespace Programming.Classwork
             //throw new NotImplementedException();
         }
     }
-    public class CustomNode<T> 
+    public class CustomNode<T> : IEquatable<CustomNode<T>>
     {
         private T value;
         private CustomNode<T> next;
@@ -260,20 +353,22 @@ namespace Programming.Classwork
 
         public T GetValue() => value;
 
-        
-       
-
         public CustomNode<T> GetNext() => next;
         public CustomNode<T> GetPrevious() => previous;
 
         public override string ToString() => value.ToString();
         public double ToDouble() => Convert.ToDouble(value);
-        public override bool Equals(object? obj) =>
-            ToString() == (obj as CustomNode<T>).ToString();
+        //public override bool Equals(object? obj) =>
+        //    ToString() == (obj as CustomNode<T>).ToString();
 
         public override int GetHashCode() => value.GetHashCode();
-        
-    }
 
-   
+        public bool Equals(Classwork.CustomNode<T>? other)
+        {
+            if (other == null || other is not CustomNode<T> node || node == null)
+                return false;
+
+            return node.value.Equals(value);
+        }
+    }
 }
