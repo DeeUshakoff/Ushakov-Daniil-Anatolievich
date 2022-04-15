@@ -67,7 +67,42 @@ public class BinarySearchTree<T>
 
     public void Add(T data) => Add(new TreeNode<T>(data));
 
+    public void SmallLeftTurn(ref TreeNode<T> node) => node = SmallLeftTurnCore(node);
+
+    public void SmallLeftTurn(TreeNode<T> node, out TreeNode<T> left) => left = SmallLeftTurnCore(node);
+
+    private TreeNode<T> SmallLeftTurnCore(TreeNode<T> node)
+    {
+        var temp = node.Right;
+        node.Right = temp.Left;
+        temp.Left = node;
+        return temp;
+    }
+
+    public void SmallRightRotate(ref TreeNode<T> node) => node = SmallRightTurnCore(node);
+    public void SmallRightRotate(TreeNode<T> node, out TreeNode<T> right) => right = SmallRightTurnCore(node);
+    private TreeNode<T> SmallRightTurnCore(TreeNode<T> node)
+    {
+        var temp = node.Left;
+        node.Left = temp.Right;
+        temp.Right = node;
+        return temp;
+    }
+    public void BigLeftRotate(ref TreeNode<T> node)
+    {
+        TreeNode<T> right;
+        SmallRightRotate(node.Right, out right);
+        node.Right = right;
+        SmallLeftTurn(ref node);
+    }
     
+    public void BigRightRotate(ref TreeNode<T> node)
+    {
+        TreeNode<T> left;
+        SmallLeftTurn(node.Left, out left);
+        node.Left = left; 
+        SmallRightRotate(ref node);
+    }
 }
 public class TreeNode<T> : IComparable<T>, IComparable
     where T : IComparable, IComparable<T>

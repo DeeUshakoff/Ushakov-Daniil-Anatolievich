@@ -30,29 +30,21 @@ namespace Programming;
             
             
             var node1 = new TreeNode<int>(1);
-            var node2 = new TreeNode<int>(5);
-            var node3 = new TreeNode<int>(2);
-            var node4 = new TreeNode<int>(0);
-            var node5 = new TreeNode<int>(1);
+            var node2 = new TreeNode<int>(0);
+            var node3 = new TreeNode<int>(3);
+            var node4 = new TreeNode<int>(2);
+            var node5 = new TreeNode<int>(5);
+           
 
-        
+            tree.Add(node1);
+            tree.Add(node2);
+            tree.Add(node3);
+            tree.Add(node4);
+            tree.Add(node5);
             
-             tree.Add(node1);
-             tree.Add(node2);
-             tree.Add(node3);
-             tree.Add(node4);
-             tree.Add(node5);
-             
+            tree.SmallLeftTurn(ref tree.Root);
+            tree.Root.Print();
             
-            
-             tree.Root.Print();
-             tree.Root.Right.Print();
-             tree.Root.Right.Left.Print();
-             tree.Root.Left.Print();
-             tree.Root.Right.Left.Left.Print();
-
-             tree.Remove(3);
-             tree.Root.Print();
              //queue.Size().Print();
              //var t = queue.Dequeue();
              // new DeeU.DRandom(0, 10000);
