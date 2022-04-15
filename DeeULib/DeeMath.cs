@@ -12,10 +12,7 @@ namespace DeeULib
         /// </summary>
         /// <param name="divider">Divider</param>
         /// <returns></returns>
-        public static double DivRem(this double source, int divider)
-        {
-            return DeeU.ToInt(Math.Floor(source / divider));
-        }
+        public static double DivRem(this double source, int divider) =>  Math.Floor(source / divider).ToInt();
 
         /// <summary>
         /// Returns number divided without remainder. Ex: 123 // 10 = 12 | 123.DivRem(10) = 12
@@ -33,44 +30,28 @@ namespace DeeULib
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static int GetFractionalPart(this double source)
-        {
-            string[] source_str = source.ToString().Split(',');
-            return source_str[1].ToInt();
-
-        }
+        public static int GetFractionalPart(this double source) => source.ToString().Split(',')[1].ToInt();
 
         /// <summary>
         /// Returns True, if input is integer, else False
         /// </summary>
         /// <param name="source">Source to checkself</param>
         /// <returns></returns>
-        public static bool IsInt(this double source)
-        {
-            int integer = DeeU.ToInt(source);
+        public static bool IsInt(this double source) => !(source - source.ToInt() > 0);
 
-            if (source - integer > 0)
-                return false;
-            return true;
-        }
-        
         /// <summary>
         /// Round number. 1.48 to 1.5, 1.32 to 1.3
         /// </summary>
         /// <param name="source">Source to round</param>
         /// <param name="accurancy">nums after dot to round</param>
         /// <returns></returns>
-        public static double Round(this double source, int accurancy)
-        {
-            return Math.Round(source, accurancy, MidpointRounding.AwayFromZero);
-        }
-        
+        public static double Round(this double source, int accurancy) => Math.Round(source, accurancy, MidpointRounding.AwayFromZero);
+
         /// <summary>
         /// Class Angle: contains Angle Degree, Sin, Cos, Tan, Cot of that Angle
         /// </summary>
         public class Angle
         {
-
             
             private double sin;
             private double cos;

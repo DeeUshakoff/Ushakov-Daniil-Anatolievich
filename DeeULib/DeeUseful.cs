@@ -1,6 +1,6 @@
 ﻿using System.Text;
-namespace DeeULib
-{
+namespace DeeULib;
+
 
     /// <summary>
     /// Useful library for simplifying the work 
@@ -9,39 +9,25 @@ namespace DeeULib
     {
 
         // Print object
-
-        public static void Print(this string Input, ConsoleColor Color = ConsoleColor.White)
+        public static void Print(this object obj, ConsoleColor color = ConsoleColor.White)
         {
-            Console.ForegroundColor = Color;
-
-            Console.WriteLine(Input);
-
+            Console.ForegroundColor = color;
+            Console.WriteLine(obj.ToString());
             Console.ResetColor();
         }
-        public static void Print(this int Input, ConsoleColor Color = ConsoleColor.White)
+        public static void PrintL(this object obj, ConsoleColor color = ConsoleColor.White)
         {
-            Console.ForegroundColor = Color;
-
-            Console.WriteLine(Input);
-
+           
+            Console.ForegroundColor = color;
+            Console.Write(obj.ToString());
             Console.ResetColor();
         }
-        public static void Print(this double Input, ConsoleColor Color = ConsoleColor.White)
+        public static void Print(params object[] obj)
         {
-            Console.ForegroundColor = Color;
-
-            Console.WriteLine(Input);
-
-            Console.ResetColor();
+            foreach (var el in obj)
+                Console.WriteLine(el.ToString());
         }
-        public static void Print(this char Input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-
-            Console.WriteLine(Input);
-
-            Console.ResetColor();
-        }
+        
         /// <summary>
         /// Print current variable to console
         /// </summary>
@@ -62,70 +48,7 @@ namespace DeeULib
         }
 
 
-        // Params print
-
-        public static void Print(params string[] Input)
-        {
-            foreach (var Item in Input)
-                Console.WriteLine(Item);
-        }
-        public static void Print(params int[] Input)
-        {
-            foreach (var Item in Input)
-                Console.WriteLine(Item);
-        }
-        public static void Print(params double[] Input)
-        {
-            foreach (var Item in Input)
-                Console.WriteLine(Item);
-        }
-        public static void Print(params char[] Input)
-        {
-            foreach (var Item in Input)
-                Console.WriteLine(Item);
-        }
-        public static void Print(params bool[] Input)
-        {
-            foreach (var Item in Input)
-                Console.WriteLine(Item);
-        }
-
-
-        // Print Line
-
-        public static void PrintL(this string input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-
-            Console.Write(input);
-
-            Console.ResetColor();
-        }
-        public static void PrintL(this int input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-            Console.Write(input);
-            Console.ResetColor();
-        }
-        public static void PrintL(this double input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-            Console.Write(input);
-            Console.ResetColor();
-        }
-        public static void PrintL(this char input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-            Console.Write(input);
-            Console.ResetColor();
-        }
-        public static void PrintL(this bool input, ConsoleColor Color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = Color;
-            Console.Write(input);
-            Console.ResetColor();
-        }
-
+       
 
         //Print Array
         public static void Print(this string[] source, ConsoleColor Color = ConsoleColor.White)
@@ -168,7 +91,7 @@ namespace DeeULib
 
         public static bool IsNum(this string source)
         {
-            if(String.IsNullOrWhiteSpace(source)) return false;
+            if(string.IsNullOrWhiteSpace(source)) return false;
 
             try
             {
@@ -179,7 +102,7 @@ namespace DeeULib
             {
                 return false;
             }
-            //return true;
+      
         }
 
         // Extensions:
@@ -213,7 +136,7 @@ namespace DeeULib
         /// <returns></returns>
         public static int ToInt(this string source)
         {
-            Int32.TryParse(source, out int result);
+            int.TryParse(source, out var result);
             return result;
         }
         /// <summary>
@@ -221,10 +144,7 @@ namespace DeeULib
         /// </summary>
         /// <param name="source">Source to convert</param>
         /// <returns></returns>
-        public static int ToInt(this double source)
-        {
-            return Convert.ToInt32(source); 
-        }
+        public static int ToInt(this double source) => Convert.ToInt32(source);
         /// <summary>
         /// Returns Double from String
         /// </summary>
@@ -233,7 +153,7 @@ namespace DeeULib
         public static double ToDouble(this string source)
         {
             
-            Double.TryParse(source.Replace('.', ','), out double result);
+            double.TryParse(source.Replace('.', ','), out var result);
             return result;
         }
         /// <summary>
@@ -243,7 +163,7 @@ namespace DeeULib
         /// <returns></returns>
         public static double ToDouble(this int source)
         {
-            Double.TryParse(source.ToString(), out double result);
+            Double.TryParse(source.ToString(), out var result);
             return result;
         }
 
@@ -253,7 +173,7 @@ namespace DeeULib
         /// <returns></returns>
         public static int ReadInt()
         {
-            Int32.TryParse(Console.ReadLine(), out int result);
+            Int32.TryParse(Console.ReadLine(), out var result);
             return result;
         }
         public static double ToDouble(this double[] source) => String.Join("", source).ToDouble();
@@ -265,9 +185,7 @@ namespace DeeULib
         /// <returns></returns>
         public static double ReadDouble()
         {
-            var input = Console.ReadLine().Replace('.', ',');
-            
-            Double.TryParse(input, out double result);
+            double.TryParse(Console.ReadLine().Replace('.', ','), out var result);
             return result;
         }
 
@@ -406,6 +324,13 @@ namespace DeeULib
             return index;
         }
 
+        public static class DRandom
+        {
+            
+            public static IEnumerable<int> GetRandomized(int from, int to, int count) =>
+                Enumerable.Range(0, count - 1).Select(x => new Random().Next(from, to + 1));
+            public static int Next(int from, int to) => new Random().Next(from, to);
+        }
 
         public static double CheckLessZero(double input)
         {
@@ -542,4 +467,3 @@ namespace DeeULib
     }
 
     
-}
