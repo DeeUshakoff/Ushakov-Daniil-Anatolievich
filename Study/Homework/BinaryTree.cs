@@ -90,16 +90,14 @@ public class BinarySearchTree<T>
     }
     public void BigLeftRotate(ref TreeNode<T> node)
     {
-        TreeNode<T> right;
-        SmallRightRotate(node.Right, out right);
+        SmallRightRotate(node.Right, out var right);
         node.Right = right;
         SmallLeftTurn(ref node);
     }
     
     public void BigRightRotate(ref TreeNode<T> node)
     {
-        TreeNode<T> left;
-        SmallLeftTurn(node.Left, out left);
+        SmallLeftTurn(node.Left, out var left);
         node.Left = left; 
         SmallRightRotate(ref node);
     }
