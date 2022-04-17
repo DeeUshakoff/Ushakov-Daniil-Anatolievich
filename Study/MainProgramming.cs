@@ -26,24 +26,24 @@ namespace Programming;
             // queue.Remove(0);
             // queue.ToString().Print();
 
-            var tree = new BinarySearchTree<int>();
-            
-            
-            var node1 = new TreeNode<int>(1);
-            var node2 = new TreeNode<int>(0);
-            var node3 = new TreeNode<int>(3);
-            var node4 = new TreeNode<int>(2);
-            var node5 = new TreeNode<int>(5);
-           
-
-            tree.Add(node1);
-            tree.Add(node2);
-            tree.Add(node3);
-            tree.Add(node4);
-            tree.Add(node5);
-            
-            tree.SmallLeftTurn(ref tree.Root);
-            tree.Root.Print();
+            // var tree = new BinarySearchTree<int>();
+            //
+            //
+            // var node1 = new TreeNode<int>(1);
+            // var node2 = new TreeNode<int>(0);
+            // var node3 = new TreeNode<int>(3);
+            // var node4 = new TreeNode<int>(2);
+            // var node5 = new TreeNode<int>(5);
+            //
+            //
+            // tree.Add(node1);
+            // tree.Add(node2);
+            // tree.Add(node3);
+            // tree.Add(node4);
+            // tree.Add(node5);
+            //
+            // tree.SmallLeftTurn(ref tree.Root);
+            // tree.Root.Print();
             
              //queue.Size().Print();
              //var t = queue.Dequeue();
@@ -54,7 +54,21 @@ namespace Programming;
              //String.Join(" ", queue.GetOddEven()).Print();
              //list.Contains(new CustomNode<int>( 1)).Print();
 
+             var company = new ClassworkEvents.Company();
+             var w1 = new ClassworkEvents.Worker(ClassworkEvents.WorkerStatus.Worker);
+             var w2 = new ClassworkEvents.Worker(ClassworkEvents.WorkerStatus.Worker);
+             var w3 = new ClassworkEvents.Worker(ClassworkEvents.WorkerStatus.Worker);
+             var w4 = new ClassworkEvents.Worker(ClassworkEvents.WorkerStatus.Worker);
+             company.AddNewWorker(w1);
+             company.AddNewWorker(w2);
+             company.AddNewWorker(w3);
+             company.RemoveWorker(1);
+             company.AddNewWorker(w4);
+             company.Print();
+             
+
         }
+        
     }
 
 
