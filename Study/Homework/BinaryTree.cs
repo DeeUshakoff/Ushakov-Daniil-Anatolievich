@@ -68,9 +68,7 @@ public class BinarySearchTree<T>
     public void Add(T data) => Add(new TreeNode<T>(data));
 
     public void SmallLeftTurn(ref TreeNode<T> node) => node = SmallLeftTurnCore(node);
-
     public void SmallLeftTurn(TreeNode<T> node, out TreeNode<T> left) => left = SmallLeftTurnCore(node);
-
     private TreeNode<T> SmallLeftTurnCore(TreeNode<T> node)
     {
         var temp = node.Right;
@@ -78,7 +76,6 @@ public class BinarySearchTree<T>
         temp.Left = node;
         return temp;
     }
-
     public void SmallRightRotate(ref TreeNode<T> node) => node = SmallRightTurnCore(node);
     public void SmallRightRotate(TreeNode<T> node, out TreeNode<T> right) => right = SmallRightTurnCore(node);
     private TreeNode<T> SmallRightTurnCore(TreeNode<T> node)
