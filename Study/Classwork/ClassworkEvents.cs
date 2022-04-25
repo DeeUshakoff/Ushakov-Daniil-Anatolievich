@@ -21,13 +21,11 @@ public class ClassworkEvents
             this.workerStatus = status;
         }
 
-        public delegate void RequestVacation();
-
-        public event RequestVacation SendRequestVacation;
+        // public delegate void RequestVacation();
+        //
+        // public event RequestVacation SendRequestVacation;
         
         public List<Worker> ReplacementSheet;
-        
-        
 
         // protected virtual void OnSendRequestVacation(Company company)
         // {
@@ -36,10 +34,8 @@ public class ClassworkEvents
     }
     public class Manager : Worker
     {
-        public Manager(WorkerStatus status) : base(status)
-        {
-            ID = -1;
-        }
+        public Manager(WorkerStatus status) : base(status) => ID = -1;
+        
     }
     public class Company
     {
@@ -52,18 +48,19 @@ public class ClassworkEvents
             worker.ID = GenerateUID();
             workers.Add(worker);
             
-            worker.SendRequestVacation += Hello;
+            //worker.SendRequestVacation += Action;
         }
 
-        public void VacationRequestHandler(Worker worker)
-        {
-            Worker.RequestVacation request;
-            
-        }
-
-        public void Hello()
-        {
-        }
+        public Worker? GetReplaceForWorker(Worker worker) =>
+            workers
+                .Except(new List<Worker>(){worker})
+                .Where(candidate => candidate.IsAvailable && candidate.GetWorkerStatus() == worker.GetWorkerStatus())
+                .OrderBy(candidate => candidate.ReplacementSheet.Count)
+                .First();
+        // public void VacationRequestHandler(Worker worker)
+        // {
+        //     Worker.RequestVacation request;
+        // }
 
         private int GenerateUID()
         {
