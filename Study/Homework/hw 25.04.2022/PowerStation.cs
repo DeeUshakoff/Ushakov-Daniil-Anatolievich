@@ -18,17 +18,17 @@ public class PowerStation
         this.criticalTemperature = criticalTemperature;
         this.heatingSpeed = heatingSpeed;
     }
-
+    
     public void Start()
     {
         this.Print();
         TickTimer = new System.Timers.Timer(3000);
         
         TickTimer.Elapsed += OnTimedEvent;
-        
-        TickTimer.Start();
-        Console.ReadLine();
-        TickTimer.Stop();
+        //
+        // TickTimer.Start();
+        // Console.ReadLine();
+        // TickTimer.Stop();
     }
 
     private void OnTimedEvent(object source, ElapsedEventArgs e)

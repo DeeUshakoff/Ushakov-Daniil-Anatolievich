@@ -1,4 +1,5 @@
-﻿using DeeULib;
+﻿using System.Runtime.InteropServices;
+using DeeULib;
 namespace Programming;
 
 public class BinarySearchTree<T>
@@ -11,13 +12,6 @@ public class BinarySearchTree<T>
     public static int GetDirection(TreeNode<T> child, TreeNode<T> parent) =>
         child.Data.CompareTo(parent.Data) > 0 ? 0 : 1;
 
-    public bool IsExternal(int position)
-    {
-        if (!(from node in nodes select node.Position).Contains(position))
-            throw new Exception($"Tree hasn't node with position {position}");
-        return nodes.Find(x => x.Position == position).IsExternal();
-    }
-    
     public void Remove(int position)
     {
         nodes.RemoveAt(nodes.FindIndex(x => x.Position == position));
@@ -98,7 +92,41 @@ public class BinarySearchTree<T>
         node.Left = left; 
         SmallRightRotate(ref node);
     }
+    
+    public List<TreeNode<T>> GetExternals() => nodes.Where(x => x.IsExternal()).ToList();
+
+    public int GetExternalsCount() => GetExternals().Count;
+    public bool IsInternal(int position) => !IsExternal(position);
+    public bool IsExternal(int position)
+    {
+        if (!(from node in nodes select node.Position).Contains(position))
+            throw new Exception($"Tree hasn't node with position {position}");
+        return nodes.Find(x => x.Position == position).IsExternal();
+    }
+    
+    public bool IsRoot(int position) => Root.Position == position;
+    public bool IsRootByKey(T key) => Root.Data.Equals(key);
+    public bool Contains(T key) => nodes.Any(node => node.Data.Equals(key));
+    
+    public void PreOrderPrint(TreeNode<T> node)
+    {
+        if (node == null)
+            return;
+        node.Print();
+        PreOrderPrint(node.Left);
+        PreOrderPrint(node.Right);
+    }
+    public void InOrderPrint(TreeNode<T> node)
+    {
+        if (node == null)
+            return;
+        PreOrderPrint(node.Left);
+        Root.Data.Print();
+        PreOrderPrint(node.Right);
+    }
 }
+
+
 public class TreeNode<T> : IComparable<T>, IComparable
     where T : IComparable, IComparable<T>
 {
