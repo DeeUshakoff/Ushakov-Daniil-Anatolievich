@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeeULib\DeeULib.csproj" />
+    <ProjectReference Include="..\Study\Programming.csproj" />
   </ItemGroup>
 
 </Project>

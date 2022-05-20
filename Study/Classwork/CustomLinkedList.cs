@@ -8,7 +8,7 @@ using DeeULib;
 
 namespace Programming.Classwork
 {
-    public class CustomLinkedList<T>
+    public class CustomLinkedList<T> 
     {
         public CustomNode<T> head;
         public CustomNode<T> Last;
@@ -272,9 +272,17 @@ namespace Programming.Classwork
                 count--;
             }
         }
-        public void RemoveHead()
+        public void RemoveFirst()
         {
-
+            if (head == tail)
+            {
+                head = null;
+                tail = null;
+                return;
+            }
+            if(head.GetNext() == null || head == null) { head = null; return; }
+            head = head.GetNext();
+            count--;
         }
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)this).GetEnumerator();
