@@ -25,7 +25,7 @@ public class PowerStation
         TickTimer = new System.Timers.Timer(3000);
         
         TickTimer.Elapsed += OnTimedEvent;
-        //
+        
         // TickTimer.Start();
         // Console.ReadLine();
         // TickTimer.Stop();
@@ -36,13 +36,16 @@ public class PowerStation
         temperature += heatingSpeed;
         if(temperature >= criticalTemperature)
             Emergency();
-       this.Print();
+        this.Print();
     }
 
     private void Emergency()
-    { 
+    {
+        if (OnEmergencyEvent == null) return;
+        
         OnEmergencyEvent(this, new OnEmergencyEventArgs());
         temperature = 0;
+
     }
 
     public override string ToString() => $"Current temperature: {temperature} / {criticalTemperature}";

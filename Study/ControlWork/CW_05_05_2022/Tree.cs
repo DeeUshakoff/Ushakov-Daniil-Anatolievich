@@ -103,14 +103,14 @@ public class CWBinarySearchTree<T> where T : IComparable, IComparable<T>
             if (currunetHeight == lastHeight)
             {
                 Console.ForegroundColor = currentColor;
-                runner.Data.Print();
+                runner.Data.Print(currentColor);
             }
             else
             {
                 lastHeight = currunetHeight;
                 currentColor = colors[new Random().Next(1, 15)];
                 Console.ForegroundColor = currentColor;
-                runner.Data.Print();
+                runner.Data.Print(currentColor);
             }
 
             if (runner.Left != null)
